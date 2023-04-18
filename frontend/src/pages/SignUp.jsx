@@ -16,24 +16,24 @@ const SignUp = () => {
           </div>
           <form className="flex flex-col m-auto w-96">
            <div className="mb-5">
-              <label className="block text-grey text-base">Full Name</label>
-              <input className="border-grey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="firstName" placeholder="Enter first and last name" required/>
+              <label className="block text-midgrey text-base">Full Name</label>
+              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="firstName" placeholder="Enter first and last name" required/>
             </div>
             <div className="mb-5">
-              <label className="block text-grey text-base">Email address</label>
-              <input className="border-grey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="email" name="email" placeholder="Email address" required/>
+              <label className="block text-midgrey text-base">Email address</label>
+              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="email" name="email" placeholder="Email address" required/>
             </div>
             <div className="mb-5">
-              <label className="block text-grey text-base">Phone Number</label>
-              <input className="border-grey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="phonenumber" placeholder="Phone Number" required/>
+              <label className="block text-midgrey text-base">Phone Number</label>
+              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="phonenumber" placeholder="Phone Number" required/>
             </div>
             <div className="mb-5">
-              <label className="block text-grey text-base">Password</label>
-              <input className="border-grey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="password" placeholder="Password" required/>
+              <label className="block text-midgrey text-base">Password</label>
+              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="password" placeholder="Password" required/>
             </div>
             <div className="mb-8">
-              <label className="block text-grey text-base">Confirm Password</label>
-              <input className="border-grey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="confirmPassword" id="" placeholder="Confirm Password" required/>
+              <label className="block text-midgrey text-base">Confirm Password</label>
+              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="confirmPassword" id="" placeholder="Confirm Password" required/>
             </div>
             <input className="p-4 bg-blue font-semibold rounded-md text-white  cursor-pointer transition duration-500 ease-in-out hover:bg-darkblue" type="submit" value="SIGN UP" />
           </form>
