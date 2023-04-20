@@ -3,8 +3,11 @@ package controllers
 import (
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
+	"os"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -67,7 +70,16 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
+	token, err := generateToken(user.Name, user.UserCategory)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "missing token",
+		})
+	}
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"token":   token,
 		"message": "successfully logged in.",
 	})
 }
@@ -82,4 +94,19 @@ func hashPassword(password string) (string, error) {
 func checkPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
+}
+
+func generateToken(name string, category string) (string, error) {
+
+	claims := jwt.MapClaims{
+		"username":      name,
+		"user-category": category,
+		"exp":           time.Now().Add(time.Hour * 72).Unix(),
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	t, err := token.SignedString([]byte(os.Getenv("SECRET")))
+
+	return t, err
 }
