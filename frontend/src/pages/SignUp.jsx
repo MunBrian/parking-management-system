@@ -2,47 +2,56 @@ import { Link } from "react-router-dom"
 
 const SignUp = () => {
   return (
-    <div className="h-screen">
-    <div className="flex flex-row">
-      <div className="basis-1/2">
-        <img className="object-cover h-screen" src="/assets/images/carpark.jpg" alt="car park" />
+   <main className="grid grid-cols-2 w-screen h-screen">
+    <section class="bg-center bg-cover bg-no-repeat bg-[url('/assets/images/carpark.jpg')] bg-gray-700 bg-blend-multiply flex items-center">
+      <div class="px-4 max-w-screen-xl text-center py-24 lg:py-56">
+          <h1 class="mb-4 text-2xl font-bold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Find Parking Spot</h1>
+          <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Helping you find the perfect parking spot within the city.</p>
       </div>
-      <div className="basis-1/2 bg-white flex flex-col">
-          <div className="my-4 text-center">
-            <h1 className="text-4xl text-blue font-bold">SIGN UP</h1>
-          </div>
-          <div className="mb-2 mx-auto">
-          <p className="text-lg">Are you a car-park owner? <Link to="#" className="text-blue font-semibold underline decoration-solid" href="#">SignUp here</Link></p>
-          </div>
-          <form className="flex flex-col m-auto w-96">
-           <div className="mb-5">
-              <label className="block text-midgrey text-base">Full Name</label>
-              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="firstName" placeholder="Enter first and last name" required/>
-            </div>
-            <div className="mb-5">
-              <label className="block text-midgrey text-base">Email address</label>
-              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="email" name="email" placeholder="Email address" required/>
-            </div>
-            <div className="mb-5">
-              <label className="block text-midgrey text-base">Phone Number</label>
-              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="text" name="phonenumber" placeholder="Phone Number" required/>
-            </div>
-            <div className="mb-5">
-              <label className="block text-midgrey text-base">Password</label>
-              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="password" placeholder="Password" required/>
-            </div>
-            <div className="mb-8">
-              <label className="block text-midgrey text-base">Confirm Password</label>
-              <input className="border-midgrey border-2 rounded-md w-full p-4 text-black font-semibold placeholder:text-grey" type="password" name="confirmPassword" id="" placeholder="Confirm Password" required/>
-            </div>
-            <input className="p-4 bg-blue font-semibold rounded-md text-white  cursor-pointer transition duration-500 ease-in-out hover:bg-darkblue" type="submit" value="SIGN UP" />
-          </form>
-          <div className="text-center mb-4">
-            <p className="text-md">Already  have an account? <Link to="/login" className="text-blue font-semibold underline decoration-solid" href="#">Login</Link></p>
+    </section>
+    <div className="bg-gray-50 dark:bg-gray-900" >
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Create your Account
+              </h1>
+              <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
+                      Are you a car park owner? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">List your parking space with us.</a>
+              </p>
+              <form class="space-y-4 md:space-y-6" action="#">
+                  <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                      <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                      <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                    </div>
+                    <div>
+                      <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                      <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required />
+                    </div>
+                  </div>
+                  <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                      <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
+                  </div>
+                  <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                  </div>
+                  <div>
+                      <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                      <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                  </div>
+                  <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Already have an account? <Link to="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
+                  </p>
+              </form>
           </div>
       </div>
-    </div>
   </div>
+    </div>
+   </main>
   )
 }
 

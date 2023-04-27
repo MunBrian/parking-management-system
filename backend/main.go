@@ -27,6 +27,8 @@ func main() {
 
 	app.Get("/dashboard", middlewares.RestrictDashboard, controllers.Dashboard)
 
+	app.Post("/bookspace", middlewares.RestrictDashboard, controllers.BookParkingSpace)
+
 	err := app.Listen(":8000")
 
 	if err != nil {
