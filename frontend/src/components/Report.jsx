@@ -1,6 +1,6 @@
 const Report = () => {
   return (
-    <div>Report</div>
+    <div className='text-black bg-white'>Report</div>
   )
 }
 

@@ -1,6 +1,6 @@
 const Receipt = () => {
   return (
-    <div>Receipt</div>
+    <div className='text-black bg-white'>Receipt</div>
   )
 }
 
