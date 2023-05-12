@@ -11,7 +11,7 @@ const Sidebar = () => {
                     <Link to="/home/profile" className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</Link>
                     <span className="text-md text-gray-500 dark:text-gray-400">name@email.com</span>
                     <button type="button" className="flex justify-center items-center mt-4 py-2.5 w-full text-base font-normal text-white bg-primary-600 rounded-lg border border-solid border-gray-400 transition duration-75 group hover:bg-primary-700 dark:text-white dark:hover:bg-primary-700 group-hover:border-none" aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-100 transition duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-100 transition duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                         <polyline points="16 17 21 12 16 7" />
                         <line x1="21" x2="9" y1="12" y2="12" />
@@ -21,15 +21,15 @@ const Sidebar = () => {
                 </div>
                 <ul className="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li>
-                        <Link to="/home/dashboard" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-primary-700 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group">
-                            <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:focus:text-white" fill="currentColor"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z"></path></svg>
+                        <Link to="/home/dashboard" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group">
+                            <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:focus:text-white" fill="currentColor"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z"></path></svg>
                             <span className="ml-3">Dashboard</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/home/map" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-700 dark:text-white group">
                             <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18.4853L16.2426 14.2426C18.5858 11.8995 18.5858 8.10051 16.2426 5.75736C13.8995 3.41421 10.1005 3.41421 7.75736 5.75736C5.41421 8.10051 5.41421 11.8995 7.75736 14.2426L12 18.4853ZM17.6569 15.6569L12 21.3137L6.34315 15.6569C3.21895 12.5327 3.21895 7.46734 6.34315 4.34315C9.46734 1.21895 14.5327 1.21895 17.6569 4.34315C20.781 7.46734 20.781 12.5327 17.6569 15.6569ZM5 22H19V24H5V22Z"></path></svg>
-                            <span className="ml-3">Map</span>
+                            <span className="ml-3">Parking Spots</span>
                         </Link >
                     </li>
                     <li>
