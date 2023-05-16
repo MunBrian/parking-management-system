@@ -23,7 +23,9 @@
 
 .leaflet-container a.leaflet-popup-close-button{
     color: white;
-    width: 0px;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
 }
 
 .leaflet-container a.leaflet-popup-close-button:hover{
@@ -31,6 +33,6 @@
 }
 
 .leaflet-touch .leaflet-control-zoom-in, 
-.leaflet-touch, .leaflet-control-zoom-out{
+.leaflet-touch .leaflet-control-zoom-out{
     color: darkgray;
 }
