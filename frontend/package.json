@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.39.0",
+    "dayjs": "^1.11.7",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.4",
     "leaflet": "^1.9.3",
@@ -20,7 +21,8 @@
     "react-leaflet": "^4.2.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.10.0",
-    "recharts": "^2.5.0"
+    "recharts": "^2.5.0",
+    "tw-elements": "^1.0.0-beta2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
