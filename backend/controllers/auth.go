@@ -27,6 +27,13 @@ func SignUp(c *fiber.Ctx) error {
 		})
 	}
 
+	if (user.Email == " " || user.Name == " "){
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "Please fill in the required fields",
+		})
+	}
+
 	userPassword := user.Password
 
 	hashPassword, _ := hashPassword(userPassword)
@@ -61,6 +68,7 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
+	//cchck i    mam
 	match := checkPasswordHash(formData.Password, user.Password)
 
 	if !match {
@@ -80,7 +88,7 @@ func Login(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"token":   token,
-		"message": "successfully logged in.",
+		"message": "successfully log in.",
 	})
 }
 
@@ -108,5 +116,6 @@ func generateToken(name string, category string) (string, error) {
 
 	t, err := token.SignedString([]byte(os.Getenv("SECRET")))
 
+	//return message  to user
 	return t, err
 }

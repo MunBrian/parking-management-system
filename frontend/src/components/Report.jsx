@@ -51,7 +51,7 @@ const Report = () => {
           </div>
         </div>
         <div>
-        <button type="button" className="inline-flex items-center gap-2 text-primary-700 hover:text-white border border-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-primary-400 dark:text-primary-400 dark:hover:text-white dark:hover:bg-primary-500">
+        <button type="button" className="inline-flex items-center gap-2 text-primary-700 hover:text-white border border-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-primary-400 dark:text-primary-400 dark:hover:text-white dark:hover:bg-primary-700">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="7 10 12 15 17 10" />

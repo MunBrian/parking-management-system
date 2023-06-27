@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
-const SignUp = () => {
+const SignUpOwner = () => {
   //Error state
   const [err, setErr] = useState({
     emailErr: false,
@@ -129,15 +129,6 @@ const SignUp = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create Account
               </h1>
-              <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                Are you a car park owner?{" "}
-                <Link
-                  to="/signup-parkowner"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  List your parking space with us.
-                </Link>
-              </p>
               <form
                 className="space-y-4 md:space-y-6"
                 action="#"
@@ -341,4 +332,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpOwner;

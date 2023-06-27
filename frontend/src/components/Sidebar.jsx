@@ -29,13 +29,13 @@ const Sidebar = () => {
                     <li>
                         <Link to="/home/map" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-primary-600 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 focus:dark:text-white group">
                             <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:group-focus:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18.4853L16.2426 14.2426C18.5858 11.8995 18.5858 8.10051 16.2426 5.75736C13.8995 3.41421 10.1005 3.41421 7.75736 5.75736C5.41421 8.10051 5.41421 11.8995 7.75736 14.2426L12 18.4853ZM17.6569 15.6569L12 21.3137L6.34315 15.6569C3.21895 12.5327 3.21895 7.46734 6.34315 4.34315C9.46734 1.21895 14.5327 1.21895 17.6569 4.34315C20.781 7.46734 20.781 12.5327 17.6569 15.6569ZM5 22H19V24H5V22Z"></path></svg>
-                            <span className="ml-3">Parking Spots</span>
+                            <span className="ml-3">Find Parking Spot</span>
                         </Link >
                     </li>
                     <li>
                         <Link to="/home/add-parking-space" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group ">
                             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white" fill="currentColor"  viewBox="0 0 24 24"><path d="M12 20.8995L16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995ZM12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM11 10V7H13V10H16V12H13V15H11V12H8V10H11Z"></path></svg>
-                            <span className="ml-3">Add parking space</span>
+                            <span className="ml-3">List Parking Space</span>
                         </Link>
                     </li>
                     <li>
