@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpOwner = () => {
+  const navigate = useNavigate();
+
   //Error state
   const [err, setErr] = useState({
     emailErr: false,
     passwordErr: false,
     phoneNumberErr: false,
     passwordLengthErr: false,
-    // emailExist: false,
+    emailExist: false,
   });
 
   const {
@@ -16,7 +18,7 @@ const SignUpOwner = () => {
     passwordErr,
     phoneNumberErr,
     passwordLengthErr,
-    //emailExist,
+    emailExist,
   } = err;
 
   //form data state
@@ -50,10 +52,11 @@ const SignUpOwner = () => {
       passwordErr: false,
       phoneNumberErr: false,
       passwordLengthErr: false,
+      emailExist: false,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate email
@@ -100,6 +103,36 @@ const SignUpOwner = () => {
 
     console.log(formData);
 
+    //if form is valid
+    try {
+      const url = "http://localhost:8000/signup";
+
+      const data = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, user_category: "park-owner" }),
+      });
+
+      const response = await data.json();
+
+      //if status is 400 - unauthorized
+      if (response.status === 400) {
+        setErr((prevState) => ({
+          ...prevState,
+          emailExist: true,
+        }));
+        //console.log("Bad request");
+        return;
+      }
+
+      //if status is OK
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+
     setFormData({
       first_name: "",
       last_name: "",
@@ -129,6 +162,13 @@ const SignUpOwner = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create Account
               </h1>
+              <div
+                className={`p-3 bg-red-500 text-white text-center my-1.5 rounded-md ${
+                  !emailExist ? "hidden" : " "
+                }`}
+              >
+                <p>User Already Exists. Login!!</p>
+              </div>
               <form
                 className="space-y-4 md:space-y-6"
                 action="#"

@@ -12,14 +12,19 @@ import (
 )
 
 func SignUp(c *fiber.Ctx) error {
+	//create a struct user of type User model
 	var user models.User
 
+	//get data from body and assign in to the user struct
 	if err := c.BodyParser(&user); err != nil {
 		return c.JSON(err.Error())
 	}
 
-	initializer.DB.Where("email = ?", user.Email).First(&user)
+	//check if email from body is available in the user DB
+	initializer.DB.Find(&user, "email = ?", user.Email)
 
+
+	//if user with same email as email from body data is available, send error with message
 	if user.ID != 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
@@ -27,40 +32,47 @@ func SignUp(c *fiber.Ctx) error {
 		})
 	}
 
-	if (user.Email == " " || user.Name == " "){
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": "Please fill in the required fields",
-		})
-	}
-
+	//assign password from body data to userPassword var
 	userPassword := user.Password
 
+	//get value of hashpassword from the hashpassword function
 	hashPassword, _ := hashPassword(userPassword)
 
+	//assigned the hashedpassword value to the user struct password
 	user.Password = hashPassword
 
+	//create new user with values from user struct
 	initializer.DB.Create(&user)
+
+	//print user struct
+	// fmt.Println(user)
 
 	return c.JSON(user)
 }
 
 func Login(c *fiber.Ctx) error {
+	//create a struct LoginData
 	type LoginData struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
+	//create a struct formData of type LoginData
 	var formData LoginData
 
+	//create a struct user of type models.User
 	var user models.User
 
+	//get data from body and assign it to struct
 	if err := c.BodyParser(&formData); err != nil {
 		return c.JSON(err.Error())
 	}
 
-	initializer.DB.Where("email = ?", formData.Email).First(&user)
+	//check if email from body is available in the user DB
+	initializer.DB.Find(&user, "email = ?", formData.Email)
 
+
+	//check if user exists
 	if user.ID == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
@@ -68,9 +80,10 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	//cchck i    mam
+	//check if user password matches that provided in the body
 	match := checkPasswordHash(formData.Password, user.Password)
 
+	//if passwords don't match, throw error
 	if !match {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
@@ -78,14 +91,17 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	token, err := generateToken(user.Name, user.UserCategory)
+	//generate token, with user's email and category as parameters
+	token, err := generateToken(user.Email, user.UserCategory)
 
+	//if no token throw error
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "missing token",
 		})
 	}
 
+	//if ok, send token to the frontend
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"token":   token,
 		"message": "successfully log in.",
@@ -104,11 +120,11 @@ func checkPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-func generateToken(name string, category string) (string, error) {
+func generateToken(email string, category string) (string, error) {
 
 	claims := jwt.MapClaims{
-		"username":      name,
-		"user-category": category,
+		"email":      email,
+		"category": category,
 		"exp":           time.Now().Add(time.Hour * 72).Unix(),
 	}
 

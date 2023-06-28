@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [err, setErr] = useState({
     emailErr: false,
-    loginErr: true,
+    loginErr: false,
   });
 
   const { emailErr, loginErr } = err;
@@ -24,11 +26,11 @@ const Login = () => {
 
     setErr({
       emailErr: false,
-      loginErr: true,
+      loginErr: false,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate email
@@ -40,7 +42,40 @@ const Login = () => {
       return;
     }
 
-    console.log(formData);
+    //if form is valid
+    try {
+      const url = "http://localhost:8000/login";
+
+      const data = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const response = await data.json();
+
+      //if status is 400 - unauthorized
+      if (response.status === 400) {
+        setErr((prevState) => ({
+          ...prevState,
+          loginErr: true,
+        }));
+        //console.log("Bad request");
+        return;
+      }
+
+      //if valid
+      navigate("/home/");
+    } catch (error) {
+      console.log(error);
+    }
+
+    setFormData({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -67,7 +102,7 @@ const Login = () => {
                   !loginErr ? "hidden" : " "
                 }`}
               >
-                <p>Email or Password is incorrect Try Again!!</p>
+                <p>Invalid Email or Password. Try Again!!</p>
               </div>
               <form
                 className="space-y-4 md:space-y-6"

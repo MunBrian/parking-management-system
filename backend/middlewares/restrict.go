@@ -10,11 +10,10 @@ func RestrictDashboard(c *fiber.Ctx) error {
 
 	claims := user.Claims.(jwt.MapClaims)
 
-	name := claims["username"].(string)
+	email := claims["email"].(string)
+	category :=  claims["category"].(string)
 
-	category := claims["user-category"].(string)
-
-	c.Set("X-User-Name", name)
+	c.Set("X-User-Email", email)
 	c.Set("X-User-Category", category)
 
 	return c.Next()
