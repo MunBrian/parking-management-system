@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import UserContext from "../context/UserContext";
 import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import Map from "./Map";
@@ -7,9 +9,10 @@ import Receipt from "./Receipt";
 import Report from "./Report";
 import Profile from "./Profile";
 import Book from "./Book";
-import { useEffect } from "react";
 
 const HomePage = () => {
+  const { setUserDetails } = useContext(UserContext);
+
   //fetch user data using token
   const fetchUserDetails = async (token) => {
     const url = "http://localhost:8000/dashboard";
@@ -22,7 +25,7 @@ const HomePage = () => {
 
     const response = await data.json();
 
-    console.log(response);
+    setUserDetails(response.user);
   };
 
   useEffect(() => {
@@ -31,6 +34,12 @@ const HomePage = () => {
 
     fetchUserDetails(userToken);
   }, []);
+
+  const userData = localStorage.getItem("user-data");
+
+  if (!userData) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>

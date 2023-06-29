@@ -24,11 +24,17 @@ func Dashboard(c *fiber.Ctx) error {
 		LastName    string `json:"lastName"`
 		Email       string `json:"email"`
 		UserCategory string `json:"userCategory"`
+		ProfilePic []byte `json:"profilepic"`
+		Phonenumber  string `json:"phone_number"`
+		NationalID string `json:"national_id"`
 	}{
 		FirstName:   user.FirstName,
 		LastName:    user.LastName,
 		Email:       user.Email,
 		UserCategory: user.UserCategory,
+		ProfilePic: user.ProfilePic,
+		Phonenumber: user.Phonenumber,
+		NationalID: user.NationalID,
 	}
 
 	//send user data
@@ -36,3 +42,6 @@ func Dashboard(c *fiber.Ctx) error {
 		"user": userResponse,
 	})
 }
+
+
+

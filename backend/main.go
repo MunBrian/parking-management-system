@@ -27,6 +27,8 @@ func main() {
 
 	app.Post("/login", controllers.Login)
 
+	app.Post("update-profile", controllers.UpdateProfile)
+
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 
 	app.Get("/dashboard", middlewares.RestrictDashboard, controllers.Dashboard)
