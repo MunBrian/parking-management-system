@@ -53,7 +53,7 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Validate email
@@ -98,7 +98,35 @@ const SignUp = () => {
       return;
     }
 
-    console.log(formData);
+    //if form is valid
+    try {
+      const url = "http://localhost:8000/signup";
+
+      const data = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, user_category: "motorist" }),
+      });
+
+      const response = await data.json();
+
+      //if status is 400 - unauthorized
+      if (response.status === 400) {
+        setErr((prevState) => ({
+          ...prevState,
+          emailExist: true,
+        }));
+        //console.log("Bad request");
+        return;
+      }
+
+      //if status is OK
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
 
     setFormData({
       first_name: "",

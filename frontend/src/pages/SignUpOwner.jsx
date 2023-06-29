@@ -101,8 +101,6 @@ const SignUpOwner = () => {
       return;
     }
 
-    console.log(formData);
-
     //if form is valid
     try {
       const url = "http://localhost:8000/signup";

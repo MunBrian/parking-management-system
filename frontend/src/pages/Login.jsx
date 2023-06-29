@@ -66,7 +66,9 @@ const Login = () => {
         return;
       }
 
-      //if valid
+      localStorage.setItem("user-data", response.token);
+
+      //if valid,. navigate to home page
       navigate("/home/");
     } catch (error) {
       console.log(error);
