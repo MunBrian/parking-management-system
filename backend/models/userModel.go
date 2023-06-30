@@ -1,9 +1,14 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type User struct {
-	gorm.Model
+	ID uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
+
 	FirstName        string `json:"first_name" gorm:"not null"`
 	LastName    string `json:"last_name" gorm:"not null"`
 	ProfilePic   []byte `json:"profilepic"`
@@ -12,4 +17,6 @@ type User struct {
 	UserCategory string `json:"user_category" gorm:"not null"`
 	NationalID string `json:"national_id"`
 	Password     string `json:"password" gorm:"not null"`
+	Created     time.Time `gorm:"autoCreateTime"`
+    Updated     time.Time `gorm:"autoUpdateTime"`
 }

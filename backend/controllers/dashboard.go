@@ -27,6 +27,7 @@ func Dashboard(c *fiber.Ctx) error {
 		ProfilePic []byte `json:"profilepic"`
 		Phonenumber  string `json:"phone_number"`
 		NationalID string `json:"national_id"`
+		ID string `json:"id"`
 	}{
 		FirstName:   user.FirstName,
 		LastName:    user.LastName,
@@ -35,6 +36,7 @@ func Dashboard(c *fiber.Ctx) error {
 		ProfilePic: user.ProfilePic,
 		Phonenumber: user.Phonenumber,
 		NationalID: user.NationalID,
+		ID: user.ID.String(),
 	}
 
 	//send user data

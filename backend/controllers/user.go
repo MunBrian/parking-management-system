@@ -31,11 +31,11 @@ func UpdateProfile(c *fiber.Ctx) error {
 	}
 
 	//check if email from body is available in the user DB
-	initializer.DB.Find(&user, "email = ?", userData.Email)
+	result := initializer.DB.Find(&user, "email = ?", userData.Email)
 
 
 	//if user doesnot exists
-	if user.ID == 0{
+	if result.RowsAffected == 0{
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
 			"message": "Invalid credentials",

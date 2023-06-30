@@ -33,5 +33,9 @@ func ConnectionToDB() {
 // migrate DB
 func SyncDB() {
 	//make migrations to db if not already created
-	DB.AutoMigrate(&models.User{})
+	err := DB.AutoMigrate(&models.User{})
+
+	if err != nil {
+		panic("failed to migrate User model")
+	}
 }

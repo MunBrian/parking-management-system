@@ -1,13 +1,17 @@
 package controllers
 
 import (
+	"errors"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
 	"os"
 	"time"
 
+	"gorm.io/gorm"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -20,34 +24,42 @@ func SignUp(c *fiber.Ctx) error {
 		return c.JSON(err.Error())
 	}
 
-	//check if email from body is available in the user DB
-	initializer.DB.Find(&user, "email = ?", user.Email)
+	// Find user with the matching email
+	result := initializer.DB.Where("email = ?", user.Email).First(&user)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			//User with the given email does not exist
+			
+			//assign password from body data to userPassword var
+			userPassword := user.Password
 
+			//get value of hashpassword from the hashpassword function
+			hashPassword, _ := hashPassword(userPassword)
 
-	//if user with same email as email from body data is available, send error with message
-	if user.ID != 0 {
+			//assigned the hashedpassword value to the user struct password
+			user.Password = hashPassword
+
+			//create new user with values from user struct
+			initializer.DB.Create(&user)
+
+			//print user struct
+			// fmt.Println(user)
+
+			return c.JSON(user)
+		} else {
+			// Error occurred during the query
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"status":  fiber.StatusInternalServerError,
+				"message": "Error retrieving user from the database",
+			})
+		}
+	} else {
+		// User with the given email already exists
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
 			"message": "User with this email already exists",
 		})
 	}
-
-	//assign password from body data to userPassword var
-	userPassword := user.Password
-
-	//get value of hashpassword from the hashpassword function
-	hashPassword, _ := hashPassword(userPassword)
-
-	//assigned the hashedpassword value to the user struct password
-	user.Password = hashPassword
-
-	//create new user with values from user struct
-	initializer.DB.Create(&user)
-
-	//print user struct
-	// fmt.Println(user)
-
-	return c.JSON(user)
 }
 
 func Login(c *fiber.Ctx) error {
@@ -73,7 +85,7 @@ func Login(c *fiber.Ctx) error {
 
 
 	//check if user exists
-	if user.ID == 0 {
+	if user.ID == uuid.Nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
 			"message": "Invalid Credentials",
