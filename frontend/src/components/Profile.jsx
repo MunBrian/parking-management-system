@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 
 const Profile = () => {
@@ -6,6 +6,15 @@ const Profile = () => {
 
   const { firstName, lastName, profilepic, email, phone_number, userCategory } =
     userDetails;
+
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    national_id: "",
+    profilepic: null,
+  });
 
   return (
     <>

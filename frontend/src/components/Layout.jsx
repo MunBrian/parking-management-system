@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import UserContext from "../context/UserContext";
 import Sidebar from "./Sidebar";
@@ -11,6 +11,8 @@ import Profile from "./Profile";
 import Book from "./Book";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const { setUserDetails } = useContext(UserContext);
 
   //fetch user data using token
@@ -21,18 +23,39 @@ const HomePage = () => {
       Authorization: `Bearer ${token}`,
     };
 
-    const data = await fetch(url, { headers });
+    const response = await fetch(url, { headers });
 
-    const response = await data.json();
+    if (response.status === 401) {
+      const errorResponse = await response.json();
+      const errorMessage = errorResponse.message;
+      throw new Error(errorMessage);
+    }
 
-    setUserDetails(response.user);
+    const data = await response.json();
+
+    return data.user;
   };
 
   useEffect(() => {
     //get token from local storage
     const userToken = localStorage.getItem("user-data");
 
-    fetchUserDetails(userToken);
+    const fetchUserData = async () => {
+      try {
+        const user = await fetchUserDetails(userToken);
+        console.log(user);
+        setUserDetails(user);
+      } catch (error) {
+        if (error.message === "Unauthorized") {
+          console.log("Unathorized error", error);
+          navigate("/login");
+        } else {
+          console.error("Error:", error);
+        }
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const userData = localStorage.getItem("user-data");

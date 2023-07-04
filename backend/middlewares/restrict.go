@@ -1,20 +1,43 @@
 package middlewares
 
 import (
+	"errors"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 )
 
+
 func RestrictDashboard(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jwt.Token)
+	//get token
+	userToken := c.Locals("user").(*jwt.Token)
+	if userToken.Valid {
+		// Token is valid
+		claims := userToken.Claims.(jwt.MapClaims)
 
-	claims := user.Claims.(jwt.MapClaims)
+		email, ok := claims["email"].(string)
+		if !ok {
+			return errors.New("failed to retrieve email from token claims")
+		}
 
-	email := claims["email"].(string)
-	category :=  claims["category"].(string)
+		category, ok := claims["category"].(string)
+		if !ok {
+			return errors.New("failed to retrieve category from token claims")
+		}
 
-	c.Set("X-User-Email", email)
-	c.Set("X-User-Category", category)
+		// Set the email and category in request headers
+		c.Set("X-User-Email", email)
+		c.Set("X-User-Category", category)
 
-	return c.Next()
+		// Proceed to the next middleware or route handler
+		return c.Next()
+	}
+	
+
+
+	//if token is invalid send message
+	 return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		 "message": "Invalid token",
+	 })
+
 }
