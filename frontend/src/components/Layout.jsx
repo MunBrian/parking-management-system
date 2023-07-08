@@ -9,11 +9,12 @@ import Receipt from "./Receipt";
 import Report from "./Report";
 import Profile from "./Profile";
 import Book from "./Book";
+import Spinner from "./Spinner";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const { setUserDetails } = useContext(UserContext);
+  const { setUserDetails, userDetails } = useContext(UserContext);
 
   //fetch user data using token
   const fetchUserDetails = async (token) => {
@@ -33,7 +34,7 @@ const HomePage = () => {
 
     const data = await response.json();
 
-    return data.user;
+    return data;
   };
 
   useEffect(() => {
@@ -43,8 +44,9 @@ const HomePage = () => {
     const fetchUserData = async () => {
       try {
         const user = await fetchUserDetails(userToken);
-        console.log(user);
-        setUserDetails(user);
+
+        console.log(user.user);
+        setUserDetails(user.user);
       } catch (error) {
         if (error.message === "Unauthorized") {
           console.log("Unathorized error", error);
@@ -62,6 +64,10 @@ const HomePage = () => {
 
   if (!userData) {
     return <Navigate to="/login" />;
+  }
+
+  if (Object.keys(userDetails).length === 0) {
+    return <Spinner />;
   }
 
   return (

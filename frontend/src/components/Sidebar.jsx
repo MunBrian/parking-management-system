@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
@@ -8,7 +8,15 @@ const Sidebar = () => {
   //get user details from usercontext
   const { userDetails, setUserDetails } = useContext(UserContext);
 
-  const { firstName, lastName, email, profilepic, userCategory } = userDetails;
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    profilepic: "",
+    email: "",
+    userCategory: "",
+  });
+
+  const { firstName, lastName, email, profilepic, userCategory } = userData;
 
   const handleLogout = () => {
     localStorage.removeItem("user-data");
@@ -17,6 +25,38 @@ const Sidebar = () => {
 
     navigate("/login");
   };
+
+  useEffect(() => {
+    if (userDetails) {
+      const { firstName, lastName, profilepic, email, userCategory } =
+        userDetails;
+
+      console.log(userCategory);
+      setUserData({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        profilepic: profilepic,
+        userCategory: userCategory,
+      });
+    }
+  }, [userDetails]);
+
+  function getImageFormat(imageData) {
+    const formats = {
+      "/9j/": "jpeg",
+      iVBORw0: "png",
+      // Add more formats as needed
+    };
+
+    for (const [prefix, format] of Object.entries(formats)) {
+      if (imageData.startsWith(prefix)) {
+        return format;
+      }
+    }
+
+    return "jpeg"; // Default to JPEG if the format is not recognized
+  }
 
   return (
     <aside
@@ -27,8 +67,14 @@ const Sidebar = () => {
       <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex flex-col items-center pb-4">
           <img
-            className="w-16 h-16 mb-3 rounded-full shadow-lg"
-            src="/assets/images/empty-profile.png"
+            className="w-16 h-16 mb-3 rounded-full shadow-lg object-cover"
+            src={
+              !profilepic
+                ? "/assets/images/empty-profile.png"
+                : `data:image/${getImageFormat(
+                    userDetails.profilepic
+                  )};base64,${userDetails.profilepic}`
+            }
             alt="Bonnie image"
           />
           <Link

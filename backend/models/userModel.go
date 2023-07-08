@@ -11,7 +11,7 @@ type User struct {
 
 	FirstName        string `json:"first_name" gorm:"not null"`
 	LastName    string `json:"last_name" gorm:"not null"`
-	ProfilePic   []byte `json:"profilepic"`
+	ProfilePic   []byte `json:"profilepic" gorm:"type:bytea"`
 	Email        string `json:"email" gorm:"not null"`
 	Phonenumber  string `json:"phone_number" gorm:"not null"`
 	UserCategory string `json:"user_category" gorm:"not null"`
