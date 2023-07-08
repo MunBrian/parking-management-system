@@ -3,7 +3,6 @@ import UserContext from "../context/UserContext";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import Spinner from "./Spinner";
 
 const Profile = () => {
   const { userDetails, setUserDetails } = useContext(UserContext);
@@ -31,6 +30,7 @@ const Profile = () => {
     const file = e.target.files[0];
     setSelectedFile(file);
 
+    //activate save button
     setActive(true);
   };
 
@@ -40,6 +40,7 @@ const Profile = () => {
       [e.target.name]: e.target.value,
     }));
 
+    //activate save button
     setActive(true);
   };
 
@@ -68,17 +69,21 @@ const Profile = () => {
 
     const data = await response.json();
 
+    //if ok
     if (data.status === 200) {
       setTimeout(() => {
+        //reload windows
         window.location.reload();
       }, 3000);
 
+      //send success message
       toast.success("Profile updated successfully", {
         autoClose: 3000,
         closeOnClick: true,
         pauseOnHover: false,
       });
 
+      //update user details
       setUserDetails(data.user);
 
       return;
@@ -104,11 +109,11 @@ const Profile = () => {
     }
   }, [userDetails]);
 
+  //check image format
   function getImageFormat(imageData) {
     const formats = {
       "/9j/": "jpeg",
       iVBORw0: "png",
-      // Add more formats as needed
     };
 
     for (const [prefix, format] of Object.entries(formats)) {

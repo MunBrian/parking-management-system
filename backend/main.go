@@ -28,6 +28,8 @@ func main() {
 	app.Post("/login", controllers.Login)
 
 	app.Patch("/update-profile", controllers.UpdateProfile)
+
+	app.Post("/create-vehicle", controllers.CreateVehicle)
 	
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	

@@ -1,19 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import MotoristBarChart from "./MotoristBarChart";
 import MotoristDashboardTable from "./MotoristDashboardTable";
 import SemiDoughnutChart from "./SemiDoughnutChart";
-import Spinner from "./Spinner";
 
 const Dashboard = () => {
   const { userDetails } = useContext(UserContext);
 
   const { national_id } = userDetails;
-
-  if (!national_id) {
-    return <Spinner />;
-  }
 
   return (
     <>
