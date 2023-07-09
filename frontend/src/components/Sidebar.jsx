@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
+import Spinner from "./Spinner";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ const Sidebar = () => {
       const { firstName, lastName, profilepic, email, userCategory } =
         userDetails;
 
-      console.log(userCategory);
       setUserData({
         firstName: firstName,
         lastName: lastName,
@@ -78,7 +78,7 @@ const Sidebar = () => {
             alt="Bonnie image"
           />
           <Link
-            to="/home/profile"
+            to={`/home/profile/${userDetails.id}`}
             className="mb-1 text-xl font-medium text-gray-900 dark:text-white"
           >
             {firstName} {lastName}
@@ -154,7 +154,7 @@ const Sidebar = () => {
             <>
               <li>
                 <Link
-                  to="/home/add-parking-space"
+                  to="/home/list-parking-space"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group "
                 >
                   <svg

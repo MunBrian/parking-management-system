@@ -1,11 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./Spinner";
 
 const Profile = () => {
-  const { userDetails, setUserDetails } = useContext(UserContext);
+  const param = useParams();
+
+  const { userDetails, setUserDetails, setVehicleDetails, vehicleDetails } =
+    useContext(UserContext);
 
   const [active, setActive] = useState(false);
 
@@ -18,12 +23,18 @@ const Profile = () => {
     Email: "",
     Phonenumber: "",
     Nationalid: "",
-    ID: "",
     Profilepic: null,
   });
 
-  const { First_name, Last_name, Email, Phonenumber, Nationalid, ID } =
-    formData;
+  const { First_name, Last_name, Email, Phonenumber, Nationalid } = formData;
+
+  const [vehicleData, setVehicleData] = useState({
+    Id: "",
+    vehicleModel: "",
+    vehiclePlate: "",
+  });
+
+  const { vehicleModel, vehiclePlate, userId } = vehicleData;
 
   //get profile image
   const handleFileChange = (e) => {
@@ -44,6 +55,48 @@ const Profile = () => {
     setActive(true);
   };
 
+  const handleVehicleChange = (e) => {
+    setVehicleData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+
+    //activate save button
+    setActive(true);
+  };
+
+  const handleVehicleUpdate = async (e) => {
+    e.preventDefault();
+
+    const url = "http://localhost:8000/update-vehicle";
+
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(vehicleData),
+    });
+
+    const data = await response.json();
+
+    if (data.status === 200) {
+      setTimeout(() => {
+        //reload windows
+        window.location.reload();
+      }, 3000);
+
+      //send success message
+      toast.success("Profile updated successfully", {
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+
+      return;
+    }
+  };
+
   const handleUserUpdate = async (e) => {
     e.preventDefault();
 
@@ -55,15 +108,11 @@ const Profile = () => {
     formData.append("Email", Email);
     formData.append("Phonenumber", Phonenumber);
     formData.append("Nationalid", Nationalid);
-    formData.append("ID", ID);
+    formData.append("ID", param.id);
     formData.append("Profilepic", selectedFile);
 
     const response = await fetch(url, {
       method: "PATCH",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      //body: JSON.stringify({ ...formData, Profilepic: selectedFile }),
       body: formData,
     });
 
@@ -92,9 +141,30 @@ const Profile = () => {
     console.log({ ...formData, Profilepic: selectedFile });
   };
 
+  //fetch user's vehicle details
+  const fetchVehicleDetails = async (id) => {
+    try {
+      const url = `http://localhost:8000/get-vehicle/${id}`;
+
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      setVehicleDetails(data);
+
+      setVehicleData({
+        Id: data.ID,
+        vehicleModel: data.vehicle_model,
+        vehiclePlate: data.vehicle_plate,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (userDetails) {
-      const { firstName, lastName, email, phone_number, national_id, id } =
+      const { firstName, lastName, email, phone_number, national_id } =
         userDetails;
 
       setFormData({
@@ -103,9 +173,13 @@ const Profile = () => {
         Email: email,
         Phonenumber: phone_number,
         Nationalid: national_id,
-        ID: id,
         Profilepic: null,
       });
+    }
+
+    //if user is available & user is a motorist
+    if (userDetails && userDetails.userCategory === "motorist") {
+      fetchVehicleDetails(userDetails.id);
     }
   }, [userDetails]);
 
@@ -123,6 +197,10 @@ const Profile = () => {
     }
 
     return "jpeg"; // Default to JPEG if the format is not recognized
+  }
+
+  if (Object.keys(vehicleDetails).length === 0) {
+    return <Spinner />;
   }
 
   return (
@@ -276,17 +354,20 @@ const Profile = () => {
       {userDetails.userCategory !== "park-owner" && (
         <>
           <h3 className="text-xl font-bold dark:text-white">Vehicle Details</h3>
-          <form action="">
+          <form action="" onSubmit={handleVehicleUpdate}>
             <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
               <div>
                 <label
                   for="car_model"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Car Model
+                  Vehicle Model
                 </label>
                 <input
                   type="text"
+                  name="vehicleModel"
+                  value={vehicleModel}
+                  onChange={handleVehicleChange}
                   id="car_model"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="e.g. Mazda Demio"
@@ -298,10 +379,13 @@ const Profile = () => {
                   for="number_plate"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Car Number Plate
+                  Vehicle Number Plate
                 </label>
                 <input
                   type="text"
+                  name="vehiclePlate"
+                  value={vehiclePlate}
+                  onChange={handleVehicleChange}
                   id="number_plate"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="e.g. KAA 100Z"
@@ -310,12 +394,22 @@ const Profile = () => {
               </div>
             </div>
             <div className="text-end mt-4">
-              <button
-                type="submit"
-                className=" text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Save
-              </button>
+              {active ? (
+                <button
+                  type="submit"
+                  className=" text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className=" text-white cursor-not-allowed bg-primary-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-400"
+                  disabled
+                >
+                  Save
+                </button>
+              )}
             </div>
           </form>
         </>

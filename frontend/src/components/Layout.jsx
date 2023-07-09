@@ -4,7 +4,7 @@ import UserContext from "../context/UserContext";
 import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import Map from "./Map";
-import ParkingSpace from "./ListParkingSpace";
+import ListParkingSpace from "./ListParkingSpace";
 import Receipt from "./Receipt";
 import Report from "./Report";
 import Profile from "./Profile";
@@ -14,7 +14,8 @@ import Spinner from "./Spinner";
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const { setUserDetails, userDetails } = useContext(UserContext);
+  const { setUserDetails, userDetails, setVehicleDetails, vehicleDetails } =
+    useContext(UserContext);
 
   //fetch user data using token
   const fetchUserDetails = async (token) => {
@@ -45,7 +46,6 @@ const HomePage = () => {
       try {
         const user = await fetchUserDetails(userToken);
 
-        console.log(user.user);
         setUserDetails(user.user);
       } catch (error) {
         if (error.message === "Unauthorized") {
@@ -62,10 +62,12 @@ const HomePage = () => {
 
   const userData = localStorage.getItem("user-data");
 
+  //if user is logged in
   if (!userData) {
     return <Navigate to="/login" />;
   }
 
+  //if no user
   if (Object.keys(userDetails).length === 0) {
     return <Spinner />;
   }
@@ -79,11 +81,11 @@ const HomePage = () => {
       >
         <Routes>
           <Route path="/" element={<Navigate to="/home/dashboard" />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/map" element={<Map />} />
           <Route path="/book" element={<Book />} />
-          <Route path="/add-parking-space" element={<ParkingSpace />} />
+          <Route path="/list-parking-space" element={<ListParkingSpace />} />
           <Route path="/receipt" element={<Receipt />} />
           <Route path="/report" element={<Report />} />
         </Routes>

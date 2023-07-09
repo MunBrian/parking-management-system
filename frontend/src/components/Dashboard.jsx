@@ -6,21 +6,22 @@ import MotoristDashboardTable from "./MotoristDashboardTable";
 import SemiDoughnutChart from "./SemiDoughnutChart";
 
 const Dashboard = () => {
-  const { userDetails } = useContext(UserContext);
+  const { userDetails, vehicleDetails } = useContext(UserContext);
 
-  const { national_id } = userDetails;
+  const { national_id, id } = userDetails;
 
   return (
     <>
-      {!national_id && (
-        <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
-          <Link to="/home/profile">
-            <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
-              To continue, Finish Setting Up Your Profile
-            </h3>
-          </Link>
-        </div>
-      )}
+      {!national_id ||
+        (!vehicleDetails && (
+          <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
+            <Link to={`/home/profile/${id}`}>
+              <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
+                To continue, Finish Setting Up Your Profile
+              </h3>
+            </Link>
+          </div>
+        ))}
       <div className="flex items-start mb-8">
         <h3 className="text-3xl font-bold dark:text-white">Dashboard</h3>
       </div>

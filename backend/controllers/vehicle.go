@@ -43,3 +43,71 @@ func CreateVehicle(c* fiber.Ctx) error {
 
 }
 
+
+func GetVehicle(c* fiber.Ctx) error {
+	var vehicle models.Vehicle
+
+	//get id from params
+	userID :=  c.Params("id")
+
+
+	//check if user id from param is available in the vehicle DB
+	initializer.DB.Find(&vehicle, "user_id = ?", userID)
+
+
+	//check vehicle with the user doesnot exists
+	if vehicle.ID == uuid.Nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "Invalid Credentials",
+		})
+	}
+
+	//send vehicle details
+	return c.Status(fiber.StatusOK).JSON(vehicle)
+}
+
+
+func UpdateVehicle(c* fiber.Ctx) error {
+	//create struct vehicle of type models vehicle
+	var vehicle models.Vehicle
+
+	//create new struct to hold body value 
+	type UpdatedVehicle struct{
+		ID string `json:"Id" gorm:"not null"`
+		VehicleModel string `json:"vehicleModel" gorm:"not null"`
+		VehiclePlate string `json:"vehiclePlate" gorm:"not null"`
+	}
+
+	//create struct  vehicleupdate from updatedVehicle
+	var vehicleUpdate UpdatedVehicle
+
+	//Parse data from body to the vehickeUpdate struct
+	if err := c.BodyParser(&vehicleUpdate); err != nil{
+		return c.JSON(err.Error())
+	}
+
+	//check if id from body is available in the vehicle DB
+	initializer.DB.Find(&vehicle, "id = ?", vehicleUpdate.ID)
+
+	//if vehicle doesnot exists
+	if vehicle.ID == uuid.Nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "Invalid Credentials",
+		})
+	}
+
+	//update values of vehicle DB to updated one from body
+	vehicle.VehicleModel = vehicleUpdate.VehicleModel
+	vehicle.VehiclePlate = vehicleUpdate.VehiclePlate
+
+	//save updated vehicle in initializers.DB
+	initializer.DB.Save(&vehicle)
+
+
+	//send vehicle
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+	})
+}
