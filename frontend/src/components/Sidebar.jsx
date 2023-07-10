@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import Spinner from "./Spinner";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -149,6 +148,23 @@ const Sidebar = () => {
                   <span className="ml-3">Find Parking Spot</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/home/receipt"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 22H5C3.34315 22 2 20.6569 2 19V3C2 2.44772 2.44772 2 3 2H17C17.5523 2 18 2.44772 18 3V15H22V19C22 20.6569 20.6569 22 19 22ZM18 17V19C18 19.5523 18.4477 20 19 20C19.5523 20 20 19.5523 20 19V17H18ZM16 20V4H4V19C4 19.5523 4.44772 20 5 20H16ZM6 7H14V9H6V7ZM6 11H14V13H6V11ZM6 15H11V17H6V15Z"></path>
+                  </svg>
+                  <span className="ml-3">Receipt</span>
+                </Link>
+              </li>
             </>
           ) : (
             <>
@@ -169,26 +185,32 @@ const Sidebar = () => {
                   <span className="ml-3">List Parking Space</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={`/home/parking-spaces/${userDetails.id}`}
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group "
+                >
+                  <svg
+                    fill="currentColor"
+                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"
+                    ></path>
+                  </svg>
+                  <span className="ml-3">Parking Space</span>
+                </Link>
+              </li>
             </>
           )}
 
-          <li>
-            <Link
-              to="/home/receipt"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 22H5C3.34315 22 2 20.6569 2 19V3C2 2.44772 2.44772 2 3 2H17C17.5523 2 18 2.44772 18 3V15H22V19C22 20.6569 20.6569 22 19 22ZM18 17V19C18 19.5523 18.4477 20 19 20C19.5523 20 20 19.5523 20 19V17H18ZM16 20V4H4V19C4 19.5523 4.44772 20 5 20H16ZM6 7H14V9H6V7ZM6 11H14V13H6V11ZM6 15H11V17H6V15Z"></path>
-              </svg>
-              <span className="ml-3">Receipt</span>
-            </Link>
-          </li>
           <li>
             <Link
               to="/home/report"

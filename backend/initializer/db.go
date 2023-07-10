@@ -42,4 +42,10 @@ func SyncDB() {
 	if err != nil {
 		panic("failed to migrate vehicle model")
 	}
+
+	
+	err = DB.AutoMigrate(&models.ParkingSpace{})
+	if err != nil {
+		panic("failed to migrate Parking model")
+	}
 }

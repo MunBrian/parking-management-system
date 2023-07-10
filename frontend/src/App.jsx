@@ -7,21 +7,24 @@ import ResetPassword from "./pages/ResetPassword";
 import HomePage from "./components/Layout";
 import SignUpOwner from "./pages/SignUpOwner";
 import { UserProvider } from "./context/UserContext";
+import { ParkingProvider } from "./context/ParkingContext";
 import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <UserProvider>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup-parkowner" element={<SignUpOwner />} />
-          <Route path="/home/*" element={<HomePage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
+        <ParkingProvider>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup-parkowner" element={<SignUpOwner />} />
+            <Route path="/home/*" element={<HomePage />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Routes>
+        </ParkingProvider>
       </UserProvider>
       <ToastContainer />
     </>

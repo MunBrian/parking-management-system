@@ -9,7 +9,9 @@ import Receipt from "./Receipt";
 import Report from "./Report";
 import Profile from "./Profile";
 import Book from "./Book";
-import Spinner from "./Spinner";
+import Loading from "./Loading";
+import ParkingSucess from "./ParkingSucess";
+import ParkingSpaces from "./ParkingSpaces";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ const HomePage = () => {
 
   //if no user
   if (Object.keys(userDetails).length === 0) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   return (
@@ -88,6 +90,8 @@ const HomePage = () => {
           <Route path="/list-parking-space" element={<ListParkingSpace />} />
           <Route path="/receipt" element={<Receipt />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/parking-success" element={<ParkingSucess />} />
+          <Route path="/parking-spaces/:id" element={<ParkingSpaces />} />
         </Routes>
       </div>
     </>

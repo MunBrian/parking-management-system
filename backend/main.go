@@ -34,7 +34,10 @@ func main() {
 	app.Get("/get-vehicle/:id", controllers.GetVehicle)
 
 	app.Patch("/update-vehicle", controllers.UpdateVehicle)
+
+	app.Post("/create-parking-space", controllers.CreateParkingSpace)
 	
+	app.Get("/get-parking-spaces/:id", controllers.GetParkingSpace)
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	
 	app.Get("/dashboard", middlewares.RestrictDashboard, controllers.Dashboard)

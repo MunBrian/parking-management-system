@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
-import Spinner from "./Spinner";
+import Loading from "./Loading";
 
 const Profile = () => {
   const param = useParams();
@@ -199,8 +199,11 @@ const Profile = () => {
     return "jpeg"; // Default to JPEG if the format is not recognized
   }
 
-  if (Object.keys(vehicleDetails).length === 0) {
-    return <Spinner />;
+  if (
+    userDetails.userCategory === "motorist" &&
+    Object.keys(vehicleDetails).length === 0
+  ) {
+    return <Loading />;
   }
 
   return (
