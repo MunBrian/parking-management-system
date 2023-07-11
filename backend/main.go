@@ -35,6 +35,8 @@ func main() {
 
 	app.Patch("/update-vehicle", controllers.UpdateVehicle)
 
+	app.Get("/get-all-parking", controllers.GetAllParkingSpace)
+
 	app.Post("/create-parking-space", controllers.CreateParkingSpace)
 	
 	app.Get("/get-parking-spaces/:id", controllers.GetParkingSpace)

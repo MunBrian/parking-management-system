@@ -24,9 +24,16 @@ const ParkingSpaces = () => {
 
     const data = await response.json();
 
+    console.log(data);
+
     if (data.status === 200) {
       const parkingSpaces = [];
-      parkingSpaces.push(data.parking_data);
+
+      let parkingData = Array.from(data.parking_data);
+
+      parkingData.forEach((parking) => {
+        parkingSpaces.push(parking);
+      });
 
       console.log(parkingSpaces);
       setParkingSpaceData(parkingSpaces);

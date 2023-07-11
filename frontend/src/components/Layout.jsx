@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import UserContext from "../context/UserContext";
+import ParkingContext from "../context/ParkingContext";
 import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import Map from "./Map";
@@ -16,8 +17,7 @@ import ParkingSpaces from "./ParkingSpaces";
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const { setUserDetails, userDetails, setVehicleDetails, vehicleDetails } =
-    useContext(UserContext);
+  const { setUserDetails, userDetails } = useContext(UserContext);
 
   //fetch user data using token
   const fetchUserDetails = async (token) => {
@@ -44,6 +44,7 @@ const HomePage = () => {
     //get token from local storage
     const userToken = localStorage.getItem("user-data");
 
+    //fetch user data
     const fetchUserData = async () => {
       try {
         const user = await fetchUserDetails(userToken);

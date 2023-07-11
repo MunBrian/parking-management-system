@@ -157,17 +157,18 @@ func CreateParkingSpace(c* fiber.Ctx) error {
     })
 }
 
-//get parking records
+//get owner's parking space
 func GetParkingSpace(c* fiber.Ctx) error {
-	var parkingSpace models.ParkingSpace
+	var parkingSpaces []models.ParkingSpace
 
-	//get owner id from params
-	var owner_id =  c.Params("id")
+		// Get owner id from params
+	ownerID := c.Params("id")
 
-	initializer.DB.Find(&parkingSpace, "owner_id = ?", owner_id)
+	// Find all parking spaces owned by the user
+	initializer.DB.Find(&parkingSpaces, "owner_id = ?", ownerID)
 
-	//if parking space doesnot exists
-	if(parkingSpace.ID == uuid.Nil){
+	// If no parking spaces found for the owner
+	if len(parkingSpaces) == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  fiber.StatusBadRequest,
 			"message": "Invalid Credentials",
@@ -175,11 +176,29 @@ func GetParkingSpace(c* fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"status": fiber.StatusOK,
-		"parking_data": parkingSpace,
+		"status":      fiber.StatusOK,
+		"parking_data": parkingSpaces,
 	})
 
 }
+
+
+//get All parking spaces
+func GetAllParkingSpace(c* fiber.Ctx) error {
+	var parkingSpaces []models.ParkingSpace
+
+	// Find all parking spaces in the db
+	initializer.DB.Find(&parkingSpaces)
+
+
+	//return all parking spaces
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status":      fiber.StatusOK,
+		"parkings": parkingSpaces,
+	})
+
+}
+
 
 
 //delete parking record
