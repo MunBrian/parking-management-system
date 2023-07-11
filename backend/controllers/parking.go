@@ -174,6 +174,35 @@ func GetParkingSpace(c* fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(fiber.StatusOK).JSON(parkingSpace)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+		"parking_data": parkingSpace,
+	})
 
+}
+
+
+//delete parking record
+func DeleteParking(c* fiber.Ctx) error {
+	var parkingSpace models.ParkingSpace
+
+	parkingID := c.Params("id")
+
+	//check if parking exist
+	initializer.DB.Find(&parkingSpace, "id = ?", parkingID)
+
+	//if parking space doesnot exists
+	if(parkingSpace.ID == uuid.Nil){
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"status":  fiber.StatusNotFound,
+			"message": "Parking Space not found",
+		})
+	}
+
+	//delete parking record
+	initializer.DB.Delete(&parkingSpace)
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+})
 }

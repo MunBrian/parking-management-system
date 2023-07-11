@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const ListParkingSpace = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const [parkingDetails, setParkingDetails] = useState({});
   const { userDetails } = useContext(UserContext);
@@ -176,9 +176,6 @@ const ListParkingSpace = () => {
       navigate("/home/parking-success");
     }
   };
-
-  console.log(latitude, longitude);
-  console.log(parkingDetails);
 
   return (
     <>
