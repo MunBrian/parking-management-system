@@ -15,14 +15,15 @@ import (
 	//"log"
 
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 )
 
-const (
-	appKey = "2eRJX2A6LtgaRxR3YzrmKXnUNS3U6Vhj"
-	appSecret = "Om8Q3XsvWVxwLjGA"
-	passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+var (
+	appKey = os.Getenv("MPESAKEY")
+	appSecret = os.Getenv("MPESASECRET")
+	passKey = os.Getenv("PASSKEY")
 )
 
 
