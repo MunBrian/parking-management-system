@@ -15,7 +15,7 @@ const Profile = () => {
   const [active, setActive] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [vehicleAdd, setVehicleAdd] = useState(false);
   //state with initial value as user details
   const [formData, setFormData] = useState({
     First_name: "",
@@ -29,7 +29,7 @@ const Profile = () => {
   const { First_name, Last_name, Email, Phonenumber, Nationalid } = formData;
 
   const [vehicleData, setVehicleData] = useState({
-    Id: "",
+    Id: userDetails.id,
     vehicleModel: "",
     vehiclePlate: "",
   });
@@ -97,6 +97,39 @@ const Profile = () => {
     }
   };
 
+  const handleVehicleCreate = async (e) => {
+    console.log(vehicleData);
+    e.preventDefault();
+
+    const url = "http://localhost:8000/create-vehicle";
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(vehicleData),
+    });
+
+    const data = await response.json();
+
+    if (data.status === 200) {
+      setTimeout(() => {
+        //reload windows
+        window.location.reload();
+      }, 3000);
+
+      //send success message
+      toast.success("Profile updated successfully", {
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+
+      return;
+    }
+  };
+
   const handleUserUpdate = async (e) => {
     e.preventDefault();
 
@@ -111,6 +144,7 @@ const Profile = () => {
     formData.append("ID", param.id);
     formData.append("Profilepic", selectedFile);
 
+    console.log(formData);
     const response = await fetch(url, {
       method: "PATCH",
       body: formData,
@@ -150,13 +184,18 @@ const Profile = () => {
 
       const data = await response.json();
 
-      setVehicleDetails(data);
+      if (data.status === 200) {
+        setVehicleDetails(data.vehicle);
 
-      setVehicleData({
-        Id: data.ID,
-        vehicleModel: data.vehicle_model,
-        vehiclePlate: data.vehicle_plate,
-      });
+        setVehicleData({
+          Id: data.vehicle.ID,
+          vehicleModel: data.vehicle.vehicle_model,
+          vehiclePlate: data.vehicle.vehicle_plate,
+        });
+        return;
+      }
+
+      setVehicleAdd(true);
     } catch (error) {
       console.log(error);
     }
@@ -199,13 +238,15 @@ const Profile = () => {
     return "jpeg"; // Default to JPEG if the format is not recognized
   }
 
-  if (
-    userDetails.userCategory === "motorist" &&
-    Object.keys(vehicleDetails).length === 0
-  ) {
-    return <Loading />;
-  }
+  // if (
+  //   userDetails.userCategory === "motorist" &&
+  //   Object.keys(vehicleDetails).length === 0
+  // ) {
+  //   return <Loading />;
+  // }
 
+  console.log(userDetails.id);
+  console.log(vehicleData);
   return (
     <>
       <div className="flex items-start mb-8">
@@ -356,65 +397,135 @@ const Profile = () => {
       </form>
       {userDetails.userCategory !== "park-owner" && (
         <>
-          <h3 className="text-xl font-bold dark:text-white">Vehicle Details</h3>
-          <form action="" onSubmit={handleVehicleUpdate}>
-            <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
-              <div>
-                <label
-                  for="car_model"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Vehicle Model
-                </label>
-                <input
-                  type="text"
-                  name="vehicleModel"
-                  value={vehicleModel}
-                  onChange={handleVehicleChange}
-                  id="car_model"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="e.g. Mazda Demio"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="number_plate"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Vehicle Number Plate
-                </label>
-                <input
-                  type="text"
-                  name="vehiclePlate"
-                  value={vehiclePlate}
-                  onChange={handleVehicleChange}
-                  id="number_plate"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="e.g. KAA 100Z"
-                  required
-                />
-              </div>
-            </div>
-            <div className="text-end mt-4">
-              {active ? (
-                <button
-                  type="submit"
-                  className=" text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Save
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className=" text-white cursor-not-allowed bg-primary-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-400"
-                  disabled
-                >
-                  Save
-                </button>
-              )}
-            </div>
-          </form>
+          {vehicleAdd ? (
+            <>
+              <h3 className="text-xl font-bold dark:text-white">
+                Vehicle Details
+              </h3>
+              <form action="" onSubmit={handleVehicleCreate}>
+                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
+                  <div>
+                    <label
+                      for="car_model"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Vehicle Model
+                    </label>
+                    <input
+                      type="text"
+                      name="vehicleModel"
+                      value={vehicleModel}
+                      onChange={handleVehicleChange}
+                      id="car_model"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="e.g. Mazda Demio"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="number_plate"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Vehicle Number Plate
+                    </label>
+                    <input
+                      type="text"
+                      name="vehiclePlate"
+                      value={vehiclePlate}
+                      onChange={handleVehicleChange}
+                      id="number_plate"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="e.g. KAA 100Z"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="text-end mt-4">
+                  {active ? (
+                    <button
+                      type="submit"
+                      className=" text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className=" text-white cursor-not-allowed bg-primary-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-400"
+                      disabled
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
+              </form>
+            </>
+          ) : (
+            <>
+              <h3 className="text-xl font-bold dark:text-white">
+                Vehicle Details
+              </h3>
+              <form action="" onSubmit={handleVehicleUpdate}>
+                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
+                  <div>
+                    <label
+                      for="car_model"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Vehicle Model
+                    </label>
+                    <input
+                      type="text"
+                      name="vehicleModel"
+                      value={vehicleModel}
+                      onChange={handleVehicleChange}
+                      id="car_model"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="e.g. Mazda Demio"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="number_plate"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Vehicle Number Plate
+                    </label>
+                    <input
+                      type="text"
+                      name="vehiclePlate"
+                      value={vehiclePlate}
+                      onChange={handleVehicleChange}
+                      id="number_plate"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="e.g. KAA 100Z"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="text-end mt-4">
+                  {active ? (
+                    <button
+                      type="submit"
+                      className=" text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className=" text-white cursor-not-allowed bg-primary-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-400"
+                      disabled
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
+              </form>
+            </>
+          )}
         </>
       )}
     </>

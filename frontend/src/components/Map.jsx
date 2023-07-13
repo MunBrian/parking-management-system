@@ -7,7 +7,8 @@ import Loading from "./Loading";
 
 const Map = () => {
   const [parkingSpaceData, setParkingSpaceData] = useContext(ParkingContext);
-
+  const [userLatitude, setUserLatitude] = useState(null);
+  const [userLongitude, setUserLongitude] = useState(null);
   //fetch all parkings
   const fetchAllParkings = async () => {
     const url = "http://localhost:8000/get-all-parking";
@@ -36,6 +37,45 @@ const Map = () => {
     return <Loading />;
   }
 
+  if (navigator.geolocation) {
+    // Geolocation is supported
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    // Geolocation is not supported by this browser
+    console.log("Geolocation is not supported by this browser.");
+  }
+
+  function showPosition(position) {
+    // Latitude and Longitude values
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    setUserLatitude(latitude);
+    setUserLongitude(longitude);
+
+    console.log("Latitude: " + latitude);
+    console.log("Longitude: " + longitude);
+  }
+
+  function showError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        console.log("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        console.log("An unknown error occurred.");
+        break;
+    }
+  }
+
+  console.log(userLatitude, userLongitude);
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -47,7 +87,11 @@ const Map = () => {
         <div className="">
           <div className="h-screen w-full">
             <MapContainer
-              center={[-1.2882, 36.8233]}
+              center={
+                userLatitude
+                  ? [userLatitude, userLongitude]
+                  : [-1.2882, 36.8233]
+              }
               zoom={10}
               className="h-full"
             >

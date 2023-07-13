@@ -60,7 +60,7 @@ const MapPopup = ({ parking }) => {
               ksh {parking.parking_fee}/h
             </p>
             <Link
-              to="/home/book"
+              to={`/home/book/${parking.ID}`}
               class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700"
             >
               Book

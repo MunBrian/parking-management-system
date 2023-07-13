@@ -1,14 +1,14 @@
 import React from "react";
 import Lottie from "lottie-react";
 
-import Success from "../assets/animations/success.json";
+import SuccessAnimation from "../assets/animations/success.json";
 
-const Sucess = () => {
+const Success = () => {
   return (
     <div>
-      <Lottie animationData={Success} loop={false} className="w-52" />
+      <Lottie animationData={SuccessAnimation} loop={false} className="w-52" />
     </div>
   );
 };
 
-export default Sucess;
+export default Success;

@@ -48,4 +48,9 @@ func SyncDB() {
 	if err != nil {
 		panic("failed to migrate Parking model")
 	}
+
+	err = DB.AutoMigrate(&models.Booking{})
+	if err != nil {
+		panic("failed to migrate Booking model")
+	}
 }

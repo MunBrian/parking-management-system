@@ -5,6 +5,7 @@ go 1.20
 require github.com/gofiber/fiber/v2 v2.44.0
 
 require (
+	github.com/AndroidStudyOpenSource/mpesa-api-go v0.0.0-20200405214254-b756218379d3 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/gofiber/jwt/v3 v3.3.8 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
@@ -16,6 +17,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/jwambugu/mpesa-golang-sdk v1.0.7 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect

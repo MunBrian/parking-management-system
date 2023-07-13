@@ -87,9 +87,9 @@ const Login = () => {
       <section className="bg-center bg-cover bg-no-repeat bg-[url('/assets/images/carpark.jpg')] bg-gray-700 bg-blend-multiply flex items-center">
         <div className="px-4 max-w-screen-xl text-center py-24 lg:py-56">
           <h1 className="mb-4 text-3xl font-extrabold tracking-wide text-white md:text-5xl lg:text-6xl">
-            Parking Spot
+            Park-It
           </h1>
-          <p className="mb-8 text-lg font-normal tracking-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+          <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
             Find the perfect parking spot within the city.
           </p>
         </div>

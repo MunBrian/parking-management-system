@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import UserContext from "../context/UserContext";
-import ParkingContext from "../context/ParkingContext";
 import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import Map from "./Map";
@@ -13,6 +12,7 @@ import Book from "./Book";
 import Loading from "./Loading";
 import ParkingSucess from "./ParkingSucess";
 import ParkingSpaces from "./ParkingSpaces";
+import PaymentSuccess from "./PaymentSuccess";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -87,11 +87,12 @@ const HomePage = () => {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/book" element={<Book />} />
+          <Route path="/book/:id" element={<Book />} />
           <Route path="/list-parking-space" element={<ListParkingSpace />} />
           <Route path="/receipt" element={<Receipt />} />
           <Route path="/report" element={<Report />} />
           <Route path="/parking-success" element={<ParkingSucess />} />
+          <Route path="/payment-success/:id" element={<PaymentSuccess />} />
           <Route path="/parking-spaces/:id" element={<ParkingSpaces />} />
         </Routes>
       </div>

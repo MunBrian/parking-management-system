@@ -6,7 +6,7 @@ const ParkingSpaceCard = ({ space, handleDelete }) => {
   };
 
   return (
-    <div className="block space-y-4 max-w-sm p-6 h-44 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="block space-y-4 p-6 h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h2 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
         {space.parking_name}
       </h2>
@@ -18,6 +18,9 @@ const ParkingSpaceCard = ({ space, handleDelete }) => {
           {space.parking_street}
         </p>
       </div>
+      <p className="text-lg font-bold text-gray-900 dark:text-white">
+        {space.parking_slots} Parking Slots
+      </p>
       <div>
         <button
           type="submit"

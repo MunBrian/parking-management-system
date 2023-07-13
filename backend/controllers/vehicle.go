@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
 
@@ -12,15 +13,26 @@ import (
 func CreateVehicle(c* fiber.Ctx) error {
 	var vehicle models.Vehicle
 
+	//create new struct to hold body value 
+	type VehicleData struct{
+		ID string `json:"Id" gorm:"not null"`
+		VehicleModel string `json:"vehicleModel" gorm:"not null"`
+		VehiclePlate string `json:"vehiclePlate" gorm:"not null"`
+	}
+
+	//create struct  vehicleupdate from updatedVehicle
+	var newVehicle VehicleData
+
 	var user models.User
 
-	if err := c.BodyParser(&vehicle); err != nil{
+	if err := c.BodyParser(&newVehicle); err != nil{
 		return c.JSON(err.Error())
 	}
 
+	fmt.Print(newVehicle)
 
 	//check if email from body is available in the user DB
-	initializer.DB.Find(&user, "id = ?", vehicle.UserID)
+	initializer.DB.Find(&user, "id = ?", newVehicle.ID)
 
 
 	//check if user exists
@@ -31,6 +43,10 @@ func CreateVehicle(c* fiber.Ctx) error {
 		})
 	}
 
+	vehicle.UserID = newVehicle.ID
+	vehicle.VehicleModel = newVehicle.VehicleModel
+	vehicle.VehiclePlate = newVehicle.VehiclePlate
+
 
 	//create new vehicle with values from vehicle struct
 	initializer.DB.Create(&vehicle)
@@ -38,6 +54,7 @@ func CreateVehicle(c* fiber.Ctx) error {
 
 	//return vehicle struct
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
 		"vehicle": vehicle,
 	})
 
@@ -64,7 +81,10 @@ func GetVehicle(c* fiber.Ctx) error {
 	}
 
 	//send vehicle details
-	return c.Status(fiber.StatusOK).JSON(vehicle)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+		"vehicle": vehicle,
+	})
 }
 
 

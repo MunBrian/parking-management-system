@@ -35,13 +35,24 @@ func main() {
 
 	app.Patch("/update-vehicle", controllers.UpdateVehicle)
 
-	app.Get("/get-all-parking", controllers.GetAllParkingSpace)
+	app.Get("/get-all-parking", controllers.GetAllParkingSpaces)
 
 	app.Post("/create-parking-space", controllers.CreateParkingSpace)
 	
-	app.Get("/get-parking-spaces/:id", controllers.GetParkingSpace)
+	app.Get("/get-parking-spaces/:id", controllers.GetOwnerParkingSpace)
+
+	app.Get("/get-parking/:id", controllers.GetParkingSpace)
 	
-	app.Delete("/delete-parking/:id", controllers.DeleteParking)
+	app.Delete("/delete-parking/:id", controllers.DeleteParkingSpace)
+
+	app.Post("/book-parking-space", controllers.BookParkingSpace)
+
+	app.Get("/get-motorist-bookings/:id", controllers.GetMotoristBookingData)
+
+	app.Get("/get-booking/:id", controllers.GetBookingData)
+	//app.Post("/process-payment", controllers.PaymentProcess)
+
+	app.Get("/get-owner-bookings/:id", controllers.GetOwnerBookingData)
 
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	
