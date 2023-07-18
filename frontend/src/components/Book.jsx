@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useLayoutEffect, useContext, useState } from "react";
 import ParkingSpot from "./ParkingSpot";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Loading from "./Loading";
@@ -17,6 +17,7 @@ const Book = () => {
   const [parkingSpaceData, setParkingSpaceData] = useState([]);
   const [vehicleData, setVehicleData] = useState({});
   const [parkingSlot, setParkingSlot] = useState(null);
+  const [bookings, setBookings] = useState([]);
   const [totalHours, setTotalHours] = useState("");
   const [fromTime, setFromTime] = useState("");
   const [toTime, setToTime] = useState("");
@@ -52,20 +53,6 @@ const Book = () => {
     }
   };
 
-  useEffect(() => {
-    //fetch parking
-    fetchParkingSpace(param.id);
-
-    if (Object.keys(userDetails).length > 0) {
-      //fetch vehicle
-      fetchVehicleDetails(userDetails.id);
-    }
-  }, []);
-
-  if (parkingSpaceData.length === 0 && Object.keys(vehicleData).length === 0) {
-    return <Loading />;
-  }
-
   //get parking slot number
   const handleParkingSlot = (slot) => {
     setParkingSlot(slot);
@@ -81,15 +68,30 @@ const Book = () => {
   //get dates
   const currentDate = new Date();
 
+  //define formattedDate
   const formattedDate = currentDate.toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  //define day
   const currentDay = currentDate.toLocaleDateString(undefined, {
     weekday: "long",
   });
 
+  //fetch all bookings
+  const fetchAllBookings = async () => {
+    const url = "http://localhost:8000/get-all-bookings";
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    setBookings(data.bookings);
+  };
+
+  //handle booking submission
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if (!totalHours) {
@@ -114,7 +116,7 @@ const Book = () => {
       return;
     }
 
-    if (vehicleData.vehicle_model === "") {
+    if (Object.keys(vehicleData).length === 0) {
       //send success message
       toast.error("Please finish setting up your profile", {
         autoClose: 3000,
@@ -122,6 +124,33 @@ const Book = () => {
         pauseOnHover: false,
       });
 
+      return;
+    }
+
+    if (userDetails.national_id === "") {
+      //send success message
+      toast.error("Please finish setting up your profile", {
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+
+      return;
+    }
+
+    const overlappingBooking = bookings.find((booking) => {
+      return (
+        booking.date === formattedDate &&
+        booking.parking_slot === parkingSlot &&
+        (booking.from_time === fromTime ||
+          booking.to_time === toTime ||
+          (fromTime > booking.from_time && toTime < booking.to_time))
+      );
+    });
+
+    if (overlappingBooking) {
+      console.log(overlappingBooking);
+      console.log("Overlapping bookings");
       return;
     }
 
@@ -160,7 +189,22 @@ const Book = () => {
     }
   };
 
-  console.log(totalHours, totalFees);
+  useLayoutEffect(() => {
+    //fetch parking
+    fetchParkingSpace(param.id);
+
+    if (Object.keys(userDetails).length > 0) {
+      //fetch vehicle
+      fetchVehicleDetails(userDetails.id);
+    }
+
+    //fetchallbookings
+    fetchAllBookings();
+  }, []);
+
+  if (parkingSpaceData.length === 0 && Object.keys(vehicleData).length === 0) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -168,7 +212,8 @@ const Book = () => {
         <Spinner />
       ) : (
         <>
-          {Object.keys(vehicleData).length === 0 && (
+          {(Object.keys(vehicleData).length === 0 ||
+            userDetails.national_id === "") && (
             <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
               <Link to={`/home/profile/${userDetails.id}`}>
                 <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
@@ -218,8 +263,6 @@ const Book = () => {
                     Parking address
                   </span>
                   <div className="text-xl font-medium text-gray-900 dark:text-white">
-                    {/* {parkingSpaceData.parking_city},{" "}
-                {parkingSpaceData.parking_street} */}
                     {parkingAdress}
                   </div>
                 </div>

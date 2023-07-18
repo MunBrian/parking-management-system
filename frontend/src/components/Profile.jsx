@@ -247,6 +247,7 @@ const Profile = () => {
 
   console.log(userDetails.id);
   console.log(vehicleData);
+  console.log(vehicleDetails);
   return (
     <>
       <div className="flex items-start mb-8">

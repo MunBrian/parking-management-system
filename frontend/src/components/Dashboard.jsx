@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import MotoristBarChart from "./MotoristBarChart";
@@ -62,7 +62,7 @@ const Dashboard = () => {
     setBookingsData([]);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       Object.keys(userDetails).length > 0 &&
       userDetails.userCategory === "motorist"
@@ -94,19 +94,18 @@ const Dashboard = () => {
       totalParkingCharges += booking.total_fees;
     });
   }
-  console.log(userDetails.userCategory);
+
   return (
     <>
-      {!national_id ||
-        (!vehicleDetails && (
-          <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
-            <Link to={`/home/profile/${id}`}>
-              <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
-                To continue, Finish Setting Up Your Profile
-              </h3>
-            </Link>
-          </div>
-        ))}
+      {userDetails.national_id === "" && (
+        <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
+          <Link to={`/home/profile/${id}`}>
+            <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
+              To continue, Finish Setting Up Your Profile
+            </h3>
+          </Link>
+        </div>
+      )}
       <div className="flex items-start mb-8">
         <h3 className="text-3xl font-bold dark:text-white">Dashboard</h3>
       </div>

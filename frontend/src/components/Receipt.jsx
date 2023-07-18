@@ -1,11 +1,12 @@
 import Lottie from "lottie-react";
 import { Link, useLocation } from "react-router-dom";
-
-import "react-toastify/dist/ReactToastify.css";
-
-import Unavailable from "../assets/animations/not-available.json";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
+
+import "react-toastify/dist/ReactToastify.css";
+import Unavailable from "../assets/animations/not-available.json";
 
 const Receipt = () => {
   const location = useLocation();
@@ -57,6 +58,21 @@ const Receipt = () => {
     }
   };
 
+  //generate receipt
+  const generateReceiptPDF = () => {
+    const input = document.getElementById("receipt"); // ID of the container element to be converted
+
+    html2canvas(input).then((canvas) => {
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+      pdf.addImage(imgData, "PNG", 10, 10, 190, 277); // Adjust the coordinates and dimensions as per your requirements
+
+      pdf.setTextColor(17, 24, 39);
+      pdf.save("receipt.pdf");
+    });
+  };
+
+  //fetch details
   useEffect(() => {
     if (paramValue) {
       fetchBooking(paramValue);
@@ -99,69 +115,73 @@ const Receipt = () => {
                   KSH. {booked.total_fees}
                 </h1>
               </div>
-              <div className="border-t border-gray-500 py-6">
-                <div className="flex justify-between p-2">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Reference Number
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {refNo}
+              <div id="receipt">
+                <div className="border-t border-gray-500 py-6">
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Reference Number
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {refNo}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Sender
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {booked.motorist_name}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Bookig Date
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {booked.date}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Parking Space Name
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {booked.parking_name}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Parking Slot
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {booked.parking_slot}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Parking Duration
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      {booked.from_time} to {booked.to_time}
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-between p-2">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Sender
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {booked.motorist_name}
-                  </div>
-                </div>
-                <div className="flex justify-between p-2">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Bookig Date
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {booked.date}
-                  </div>
-                </div>
-                <div className="flex justify-between p-2">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Parking Space Name
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {booked.parking_name}
-                  </div>
-                </div>
-                <div className="flex justify-between p-2">
-                  <span className="text-xs font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Parking Slot
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {booked.parking_slot}
-                  </div>
-                </div>
-                <div className="flex justify-between p-2">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Parking Duration
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    {booked.from_time} to {booked.to_time}
+                <div className="border-y border-dashed border-gray-500 py-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
+                      Total Payment
+                    </span>
+                    <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
+                      Ksh. {booked.total_fees}
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="border-y border-dashed border-gray-500 py-3">
-                <div className="flex justify-between">
-                  <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                    Total Payment
-                  </span>
-                  <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-200">
-                    Ksh. {booked.total_fees}
-                  </div>
-                </div>
-              </div>
+
               <div className="py-2 mt-3">
                 <button
                   type="button"
+                  onClick={generateReceiptPDF}
                   className="flex justify-center items-center w-full gap-2 text-primary-700 hover:text-white border border-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-primary-500 dark:text-primary-400 dark:hover:text-white dark:hover:bg-primary-800"
                 >
                   <svg
@@ -180,7 +200,7 @@ const Receipt = () => {
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" x2="12" y1="15" y2="3" />
                   </svg>
-                  <span>Get PDF Receipt</span>
+                  <span>Download PDF Receipt</span>
                 </button>
               </div>
             </div>

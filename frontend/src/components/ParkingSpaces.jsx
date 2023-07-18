@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useLayoutEffect, useContext, useState } from "react";
 import ParkingContext from "../context/ParkingContext";
 import { useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -44,7 +44,7 @@ const ParkingSpaces = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       fetchParkingSpace(param.id);
     } catch (error) {

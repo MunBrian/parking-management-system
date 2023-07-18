@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import MapPopup from "./MapPopup";
@@ -24,25 +24,25 @@ const Map = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       //fetch all parking
       fetchAllParkings();
     } catch (error) {
       console.log(error);
     }
+
+    if (navigator.geolocation) {
+      // Geolocation is supported
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      // Geolocation is not supported by this browser
+      console.log("Geolocation is not supported by this browser.");
+    }
   }, []);
 
   if (parkingSpaceData.length === 0) {
     return <Loading />;
-  }
-
-  if (navigator.geolocation) {
-    // Geolocation is supported
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    // Geolocation is not supported by this browser
-    console.log("Geolocation is not supported by this browser.");
   }
 
   function showPosition(position) {
@@ -88,15 +88,14 @@ const Map = () => {
           <div className="h-screen w-full">
             <MapContainer
               center={
-                userLatitude
-                  ? [userLatitude, userLongitude]
-                  : [-1.2882, 36.8233]
+                // userLatitude
+                [-1.2882, 36.8233]
               }
               zoom={10}
               className="h-full"
             >
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/search?query=Nairobi#map=11/-1.3040/36.8774">Open street map</a>'
+                attribution='&copy; <a href="https://www.openstreetmap.org/search?query=Nairobi#map=11/-1.3040/36.8774">Open street map</a> Nairobi'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               {parkingSpaceData.map((parking) => (
@@ -106,12 +105,11 @@ const Map = () => {
                     parseFloat(parking.parking_lng),
                   ]}
                 >
-                  <MapPopup parking={parking} />
+                  <MapPopup key={parking.id} parking={parking} />
                 </Marker>
               ))}
             </MapContainer>
           </div>
-          <div>Map Card</div>
         </div>
       </div>
     </>
