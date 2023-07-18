@@ -1,7 +1,8 @@
 package controllers
 
 import (
-	//"fmt"
+	"encoding/json"
+	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
 
@@ -12,24 +13,21 @@ import (
 
 	"context"
 
-	//"log"
-
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 )
 
-var (
-	appKey = os.Getenv("MPESAKEY")
-	appSecret = os.Getenv("MPESASECRET")
-	passKey = os.Getenv("PASSKEY")
-)
 
 
 
 
 func BookParkingSpace(c *fiber.Ctx) error {
+	appKey := os.Getenv("MPESAKEY")
+	appSecret := os.Getenv("MPESASECRET")
+	passKey := os.Getenv("PASSKEY")
+	
 	// Parse multi-part form data
     form, err := c.MultipartForm()
     if err != nil {
@@ -97,8 +95,8 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	booking.ParkingDuration = parkingDuration
 	booking.TotalFees = totalFees
 
-	motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
-	motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
+	// motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
+	// motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
 
 	if err != nil {
 		// Handle the error, such as logging or returning an error response
@@ -120,10 +118,10 @@ func BookParkingSpace(c *fiber.Ctx) error {
         Amount:            10,
         PartyA:            254746344408,
         PartyB:            174379,
-        PhoneNumber:       uint64(motoristPhoneNumber),
-		//PhoneNumber: 254746344408,
-		CallBackURL:       "https://example.com",
-       // CallBackURL:       "https://8c91-197-237-98-40.ngrok.io/process-payment",
+        //PhoneNumber:       uint64(motoristPhoneNumber),
+		PhoneNumber: 254746344408,
+		//CallBackURL:       "https://example.com",
+       CallBackURL:       "https://9e31-41-89-10-241.ngrok.io/payment-process",
         AccountReference:  "ParkIt",
         TransactionDesc:   "ParkSpace pay",
     })
@@ -138,6 +136,7 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	}
 
 
+	fmt.Print(stkPushRes)
 	//check stk response code
 	if(stkPushRes.ResponseCode == "0"){
 		//create booking record from form data
@@ -256,16 +255,49 @@ func GetBookingData(c *fiber.Ctx) error{
 
 }
 
-// func PaymentProcess(c *fiber.Ctx) error {
-// 	callback, err := mpesa.UnmarshalSTKPushCallback(c.Request().Body())
 
-// 	if err != nil {
-//         log.Fatalln(err)
-//     }
-    
-//     log.Printf("%+v", callback)
-// 	log.Print(c.Request().Body())
+func GetAllBookings(c *fiber.Ctx) error {
+	var bookings []models.Booking
 
-// 	return nil
+	// Find all parking spaces in the db
+	initializer.DB.Find(&bookings)
 
+
+	//return all parking spaces
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status":      fiber.StatusOK,
+		"bookings": bookings,
+	})
+
+}
+
+func PaymentProcess(c *fiber.Ctx) error {
+	//callback, err := mpesa.UnmarshalSTKPushCallback(c.Body())
+
+// if err != nil {
+//     log.Fatalln(err)
 // }
+
+// log.Printf("%+v", callback)
+// 	log.Print(c.Body())
+
+	type Message struct{
+		Body string `json:"body"`
+	
+	}
+
+
+// 	sendMessage := Message{
+// 		Testing: "Ok",
+// 	}
+
+var sendMessage Message
+
+//  if err := c.BodyParser(&sendMessage); err != nil {
+// 	return c.JSON(err.Error())
+//  }
+
+
+	return c.JSON(json.Unmarshal(c.Body(), &sendMessage ))
+
+}

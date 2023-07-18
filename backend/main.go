@@ -50,9 +50,14 @@ func main() {
 	app.Get("/get-motorist-bookings/:id", controllers.GetMotoristBookingData)
 
 	app.Get("/get-booking/:id", controllers.GetBookingData)
-	//app.Post("/process-payment", controllers.PaymentProcess)
+	
+	app.Post("/process-payment", controllers.PaymentProcess)
 
 	app.Get("/get-owner-bookings/:id", controllers.GetOwnerBookingData)
+
+	app.Get("/get-all-bookings", controllers.GetAllBookings)
+
+	//app.Post("/payment-process", controllers.PaymentProcess)
 
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	

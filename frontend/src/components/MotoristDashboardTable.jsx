@@ -3,7 +3,7 @@ import BookingsContext from "../context/BookingsContext";
 
 const MotoristDashboardTable = () => {
   const [bookingsData] = useContext(BookingsContext);
-  const lastFourBookings = bookingsData.slice(-4);
+  const lastFourBookings = bookingsData.slice(-4).reverse();
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

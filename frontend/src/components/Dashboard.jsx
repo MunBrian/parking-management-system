@@ -46,15 +46,12 @@ const Dashboard = () => {
     if (data.status === 200) {
       const bookings = [];
 
-      console.log(data.bookings);
-
       let bookingData = Array.from(data.bookings);
 
       bookingData.forEach((book) => {
         bookings.push(book);
       });
 
-      console.log(bookings);
       setBookingsData(bookings);
       return;
     }

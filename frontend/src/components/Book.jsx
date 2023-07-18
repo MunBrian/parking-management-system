@@ -138,19 +138,27 @@ const Book = () => {
       return;
     }
 
+    //check if motorist parking slot time has already been booked
     const overlappingBooking = bookings.find((booking) => {
       return (
         booking.date === formattedDate &&
         booking.parking_slot === parkingSlot &&
         (booking.from_time === fromTime ||
           booking.to_time === toTime ||
-          (fromTime > booking.from_time && toTime < booking.to_time))
+          (booking.from_time > fromTime && booking.to_time < toTime))
       );
     });
 
     if (overlappingBooking) {
-      console.log(overlappingBooking);
-      console.log("Overlapping bookings");
+      //send success message
+      toast.error(
+        "Parking Slot unavailable between the picked time. Please choose different times, or try another slot",
+        {
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: false,
+        }
+      );
       return;
     }
 
