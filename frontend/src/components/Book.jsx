@@ -140,12 +140,15 @@ const Book = () => {
 
     //check if motorist parking slot time has already been booked
     const overlappingBooking = bookings.find((booking) => {
+      const bookingFromTime = new Date(`January 1, 2023 ${booking.from_time}`);
+      const bookingToTime = new Date(`January 1, 2023 ${booking.to_time}`);
+      const selectedFromTime = new Date(`January 1, 2023 ${fromTime}`);
+      const selectedToTime = new Date(`January 1, 2023 ${toTime}`);
       return (
         booking.date === formattedDate &&
         booking.parking_slot === parkingSlot &&
-        (booking.from_time === fromTime ||
-          booking.to_time === toTime ||
-          (booking.from_time > fromTime && booking.to_time < toTime))
+        (selectedFromTime <= bookingFromTime <= selectedToTime ||
+          selectedFromTime <= bookingToTime <= selectedToTime)
       );
     });
 
@@ -192,8 +195,13 @@ const Book = () => {
 
     //if ok
     if (data.status === 200) {
-      setSpinner(false);
-      navigate(`/home/payment-success/${data.booking.ID}`);
+      setTimeout(() => {
+        navigate(`/home/payment-success/${data.booking.ID}`);
+      }, 4000);
+
+      setTimeout(() => {
+        setSpinner(false);
+      }, 3000);
     }
   };
 
@@ -213,6 +221,9 @@ const Book = () => {
   if (parkingSpaceData.length === 0 && Object.keys(vehicleData).length === 0) {
     return <Loading />;
   }
+
+  console.log(bookings);
+  console.log(fromTime);
 
   return (
     <>

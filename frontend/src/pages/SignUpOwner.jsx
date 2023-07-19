@@ -146,7 +146,7 @@ const SignUpOwner = () => {
       <section className="bg-center bg-cover bg-no-repeat bg-[url('/assets/images/carpark.jpg')] bg-gray-700 bg-blend-multiply flex items-center">
         <div className="px-4 max-w-screen-xl text-center py-24 lg:py-56">
           <h1 className="mb-4 text-3xl font-extrabold tracking-wide text-white md:text-5xl lg:text-6xl">
-            Parking Spot
+            Park-It
           </h1>
           <p className="mb-8 text-lg font-normal tracking-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
             Find the perfect parking spot within the city.
@@ -252,7 +252,7 @@ const SignUpOwner = () => {
                         : "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     }
                   >
-                    Phone number
+                    Safaricom mobile number
                   </label>
                   <input
                     type="text"
@@ -264,7 +264,7 @@ const SignUpOwner = () => {
                         ? "text-gray-900 dark:text-white border-red-500 block w-full p-2.5 rounded-lg bg-gray-50 dark:bg-gray-700"
                         : "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     }
-                    placeholder="254712345600"
+                    placeholder="254712345600, must start with 254"
                     required
                   />
                   <p
@@ -274,7 +274,7 @@ const SignUpOwner = () => {
                         : "hidden"
                     }
                   >
-                    Please input a valid phonenumber
+                    Please input a valid safaricom phonenumber
                   </p>
                 </div>
                 <div>

@@ -135,7 +135,7 @@ const Receipt = () => {
                   </div>
                   <div className="flex justify-between p-2">
                     <span className="text-sm font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                      Bookig Date
+                      Booking Date
                     </span>
                     <div className="text-base font-normal tracking-tight text-gray-900 dark:text-gray-500">
                       {booked.date}

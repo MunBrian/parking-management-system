@@ -95,8 +95,8 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	booking.ParkingDuration = parkingDuration
 	booking.TotalFees = totalFees
 
-	// motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
-	// motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
+	motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
+	motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
 
 	if err != nil {
 		// Handle the error, such as logging or returning an error response
@@ -118,8 +118,8 @@ func BookParkingSpace(c *fiber.Ctx) error {
         Amount:            10,
         PartyA:            254746344408,
         PartyB:            174379,
-        //PhoneNumber:       uint64(motoristPhoneNumber),
-		PhoneNumber: 254746344408,
+        PhoneNumber:       uint64(motoristPhoneNumber),
+		//PhoneNumber: 254746344408,
 		//CallBackURL:       "https://example.com",
        CallBackURL:       "https://9e31-41-89-10-241.ngrok.io/payment-process",
         AccountReference:  "ParkIt",
