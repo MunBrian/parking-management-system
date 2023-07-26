@@ -134,7 +134,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/home/map"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-primary-600 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 focus:dark:text-white group"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group"
                 >
                   <svg
                     aria-hidden="true"
@@ -151,12 +151,12 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/home/receipt"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
-                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:group-focus:text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -171,12 +171,12 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/home/list-parking-space"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group "
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
-                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:group-focus:text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -188,11 +188,11 @@ const Sidebar = () => {
               <li>
                 <Link
                   to={`/home/parking-spaces/${userDetails.id}`}
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group "
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group"
                 >
                   <svg
                     fill="currentColor"
-                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                    className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:group-focus:text-white"
                     stroke="currentColor"
                     stroke-width="1.5"
                     viewBox="0 0 24 24"
@@ -214,12 +214,12 @@ const Sidebar = () => {
           <li>
             <Link
               to="/home/report"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-primary-700 dark:text-white focus:dark:bg-primary-700 group"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:text-white hover:bg-primary-600 focus:bg-primary-700 focus:dark:bg-primary-700 focus:dark:text-white  dark:hover:bg-primary-700 dark:text-white group"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
-                className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white dark:group-focus:text-white"
+                className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white dark:group-focus:text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
