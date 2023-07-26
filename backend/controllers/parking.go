@@ -174,7 +174,6 @@ func GetOwnerParkingSpace(c* fiber.Ctx) error {
 			"parking_data": parkingSpaces,
 		})
 	}
-
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status":      fiber.StatusOK,
 		"parking_data": parkingSpaces,
@@ -189,7 +188,6 @@ func GetAllParkingSpaces(c* fiber.Ctx) error {
 
 	// Find all parking spaces in the db
 	initializer.DB.Find(&parkingSpaces)
-
 
 	//return all parking spaces
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
@@ -241,7 +239,6 @@ func DeleteParkingSpace(c* fiber.Ctx) error {
 			"message": "Parking Space not found",
 		})
 	}
-
 	//delete parking record
 	initializer.DB.Delete(&parkingSpace)
 

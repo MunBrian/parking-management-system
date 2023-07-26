@@ -57,11 +57,15 @@ func main() {
 
 	app.Get("/get-all-bookings", controllers.GetAllBookings)
 
-	//app.Post("/payment-process", controllers.PaymentProcess)
+	app.Post("/forgot-password", controllers.ForgotPassword)
+
+	app.Post("/payment-process", controllers.PaymentProcess)
 
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	
-	app.Get("/dashboard", middlewares.RestrictDashboard, controllers.Dashboard)
+	app.Get("/dashboard", middlewares.ValidateToken, controllers.Dashboard)
+
+	app.Post("/reset-password", middlewares.ValidateToken, controllers.ResetPassword)
 	
 	//app.Post("/bookspace", middlewares.RestrictDashboard, controllers.BookParkingSpace)
 

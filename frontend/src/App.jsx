@@ -24,7 +24,10 @@ function App() {
               <Route path="/signup-parkowner" element={<SignUpOwner />} />
               <Route path="/home/*" element={<HomePage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route
+                path="/reset-password/:token"
+                element={<ResetPassword />}
+              />
             </Routes>
           </BookingsProvider>
         </ParkingProvider>

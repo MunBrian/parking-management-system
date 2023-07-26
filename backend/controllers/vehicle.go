@@ -125,7 +125,6 @@ func UpdateVehicle(c* fiber.Ctx) error {
 	//save updated vehicle in initializers.DB
 	initializer.DB.Save(&vehicle)
 
-
 	//send vehicle
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status": fiber.StatusOK,

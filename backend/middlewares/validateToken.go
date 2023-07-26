@@ -8,7 +8,7 @@ import (
 )
 
 
-func RestrictDashboard(c *fiber.Ctx) error {
+func ValidateToken(c *fiber.Ctx) error {
 	//get token
 	userToken := c.Locals("user").(*jwt.Token)
 	if userToken.Valid {
@@ -33,8 +33,6 @@ func RestrictDashboard(c *fiber.Ctx) error {
 		return c.Next()
 	}
 	
-
-
 	//if token is invalid send message
 	 return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 		 "message": "Invalid token",

@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"encoding/base64"
 	"errors"
 	"github/MunBrian/parking-management-system/initializer"
+	"github/MunBrian/parking-management-system/middlewares"
 	"github/MunBrian/parking-management-system/models"
 	"os"
 	"time"
@@ -118,6 +120,126 @@ func Login(c *fiber.Ctx) error {
 		"token":   token,
 		"message": "successfully log in.",
 	})
+}
+
+
+func ForgotPassword(c *fiber.Ctx) error {
+	//create a struct EmailData
+	type EmailData struct {
+		Email string `json:"email"`
+	}
+
+	var user models.User
+
+	//create a var email of type EmailData
+	var email EmailData 
+
+	//get email data from body
+	if err := c.BodyParser(&email); err != nil{
+		return c.JSON(err.Error())
+	}
+
+
+	//check if email from body is available in the user DB
+	initializer.DB.Find(&user, "email = ?", email.Email)
+
+
+	//check if user exists
+	if user.ID == uuid.Nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "Email doesnot exist",
+		})
+	}
+
+	//generate token
+	token, err := generateToken(email.Email, user.UserCategory)
+
+	//if no token throw error
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "missing token",
+		})
+	}
+
+	// Encode the token before sending it in the email
+	encodedToken := base64.URLEncoding.EncodeToString([]byte(token))
+
+	//generate Email with the token
+	err = middlewares.GenerateEmail([]string{user.Email}, user.FirstName, encodedToken)
+
+	if err != nil{
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to generate email",
+		})
+	}
+
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+		"message": "email sent sucessfully",
+	})
+
+}
+
+//reset password
+func ResetPassword(c *fiber.Ctx) error {
+
+	type Password struct{
+		Password string `json:"password"`
+	}
+	
+	//declare user struct of type models user
+	var user models.User
+
+	//get email value from JWT token 
+	email := c.GetRespHeader("X-User-Email")
+
+	//check if user exists 
+	initializer.DB.Find(&user, "email= ?", email)
+
+	//check if user exists
+	if user.ID == uuid.Nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "User doesnot exist",
+		})
+	}
+
+	var passwordValue Password
+
+	//get password value from body
+	if err := c.BodyParser(&passwordValue); err != nil{
+		return c.JSON(err.Error())
+	}
+
+
+	//hash the new password
+	hashedPassword, err := hashPassword(passwordValue.Password)
+
+
+	if err != nil{
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"status":  fiber.StatusInternalServerError,
+			"message": "Failed to hash password",
+		})
+	}
+
+
+	//update value of password to the new hashed password
+	user.Password = hashedPassword
+
+
+	//update user DB
+	initializer.DB.Save(&user)
+
+
+	//return Ok
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status": fiber.StatusOK,
+		"message": "Password reset was successful",
+	})
+
 }
 
 // generate hashed password

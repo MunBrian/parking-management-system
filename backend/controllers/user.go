@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
 	"time"
@@ -13,7 +12,6 @@ import (
 )
 
 func UpdateProfile(c *fiber.Ctx) error {
-	
 	// Parse multi-part form data
     form, err := c.MultipartForm()
     if err != nil {
@@ -49,8 +47,6 @@ func UpdateProfile(c *fiber.Ctx) error {
         NationalID:  fields["Nationalid"][0],
         Updated:     time.Now(),
     }
-
-	fmt.Println(form)
 
     // Handle profile picture upload if available
 	if profilePicFile, err := c.FormFile("Profilepic"); err == nil {

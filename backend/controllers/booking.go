@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
 	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
@@ -98,6 +97,8 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
 	motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
 
+	
+
 	if err != nil {
 		// Handle the error, such as logging or returning an error response
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -112,16 +113,17 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	//send stk push
     mpesaApp := mpesa.NewApp(http.DefaultClient, appKey, appSecret, mpesa.Sandbox)
 
+
     stkPushRes, err := mpesaApp.STKPush(ctx, passKey, mpesa.STKPushRequest{
         BusinessShortCode: 174379,
         TransactionType:   "CustomerPayBillOnline",
-        Amount:            10,
+        Amount:           	uint(totalFees),
         PartyA:            254746344408,
         PartyB:            174379,
         PhoneNumber:       uint64(motoristPhoneNumber),
 		//PhoneNumber: 254746344408,
 		//CallBackURL:       "https://example.com",
-       CallBackURL:       "https://9e31-41-89-10-241.ngrok.io/payment-process",
+       CallBackURL:       "https://a8fb-197-237-98-40.ngrok.io/payment-process",
         AccountReference:  "ParkIt",
         TransactionDesc:   "ParkSpace pay",
     })
@@ -148,6 +150,13 @@ func BookParkingSpace(c *fiber.Ctx) error {
         })
 	}
 
+	//Call the PaymentProcess function and wait for its return
+	if err := PaymentProcess(c); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map {
+			"status": fiber.StatusBadRequest,
+			"message": "Payment failed",
+		})
+	}
 
 
     // Return booking record
@@ -174,7 +183,7 @@ func GetMotoristBookingData(c *fiber.Ctx) error{
 			"bookings": bookings,
 		})
 	}
-
+	
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status":      fiber.StatusOK,
 		"bookings": bookings,
@@ -272,32 +281,19 @@ func GetAllBookings(c *fiber.Ctx) error {
 }
 
 func PaymentProcess(c *fiber.Ctx) error {
-	//callback, err := mpesa.UnmarshalSTKPushCallback(c.Body())
 
-// if err != nil {
-//     log.Fatalln(err)
-// }
+	var res mpesa.STKPushCallback
 
-// log.Printf("%+v", callback)
-// 	log.Print(c.Body())
-
-	type Message struct{
-		Body string `json:"body"`
-	
+	if err := c.BodyParser(&res); err !=nil{
+		return c.JSON(err.Error())
 	}
 
 
-// 	sendMessage := Message{
-// 		Testing: "Ok",
-// 	}
+	if(res.Body.STKCallback.ResultCode != 0){
+		return &fiber.Error{}
+	}
 
-var sendMessage Message
+	fmt.Printf("%+v", res.Body.STKCallback)
 
-//  if err := c.BodyParser(&sendMessage); err != nil {
-// 	return c.JSON(err.Error())
-//  }
-
-
-	return c.JSON(json.Unmarshal(c.Body(), &sendMessage ))
-
+	return nil
 }
