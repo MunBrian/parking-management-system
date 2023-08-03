@@ -52,9 +52,6 @@ const Map = () => {
 
     setUserLatitude(latitude);
     setUserLongitude(longitude);
-
-    console.log("Latitude: " + latitude);
-    console.log("Longitude: " + longitude);
   }
 
   function showError(error) {
@@ -73,8 +70,6 @@ const Map = () => {
         break;
     }
   }
-
-  console.log(userLatitude, userLongitude);
 
   return (
     <>

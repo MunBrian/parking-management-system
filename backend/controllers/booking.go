@@ -1,32 +1,18 @@
 package controllers
 
 import (
-	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
-
-	"github.com/jwambugu/mpesa-golang-sdk"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-
-	"context"
-
-	"net/http"
-	"os"
-	"strconv"
-	"time"
 )
 
 
 
-
-
 func BookParkingSpace(c *fiber.Ctx) error {
-	appKey := os.Getenv("MPESAKEY")
-	appSecret := os.Getenv("MPESASECRET")
-	passKey := os.Getenv("PASSKEY")
-	
+
 	// Parse multi-part form data
     form, err := c.MultipartForm()
     if err != nil {
@@ -94,76 +80,16 @@ func BookParkingSpace(c *fiber.Ctx) error {
 	booking.ParkingDuration = parkingDuration
 	booking.TotalFees = totalFees
 
-	motoristPhoneNumberStr := fields["motorist_phonenumber"][0]
-	motoristPhoneNumber, err := strconv.Atoi(motoristPhoneNumberStr)
-
 	
-
-	if err != nil {
-		// Handle the error, such as logging or returning an error response
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"status":  fiber.StatusInternalServerError,
-			"message": "Failed to convert motorist phone number",
-		})
-	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-    defer cancel()
-
-	//send stk push
-    mpesaApp := mpesa.NewApp(http.DefaultClient, appKey, appSecret, mpesa.Sandbox)
-
-
-    stkPushRes, err := mpesaApp.STKPush(ctx, passKey, mpesa.STKPushRequest{
-        BusinessShortCode: 174379,
-        TransactionType:   "CustomerPayBillOnline",
-        Amount:           	uint(totalFees),
-        PartyA:            254746344408,
-        PartyB:            174379,
-        PhoneNumber:       uint64(motoristPhoneNumber),
-		//PhoneNumber: 254746344408,
-		//CallBackURL:       "https://example.com",
-       CallBackURL:       "https://a8fb-197-237-98-40.ngrok.io/payment-process",
-        AccountReference:  "ParkIt",
-        TransactionDesc:   "ParkSpace pay",
-    })
-
-
-	//return error
-	if err != nil{
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"status":  fiber.StatusInternalServerError,
-			"message": "Payment process error",
-		})
-	}
-
-
-	fmt.Print(stkPushRes)
-	//check stk response code
-	if(stkPushRes.ResponseCode == "0"){
-		//create booking record from form data
-		initializer.DB.Create(&booking)
-	}else{
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-            "status":  fiber.StatusInternalServerError,
-            "message": "Payment process error",
-        })
-	}
-
-	//Call the PaymentProcess function and wait for its return
-	if err := PaymentProcess(c); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map {
-			"status": fiber.StatusBadRequest,
-			"message": "Payment failed",
-		})
-	}
-
+	//create booking record from form data
+	initializer.DB.Create(&booking)
 
     // Return booking record
     return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status": fiber.StatusOK,
         "booking":   booking,
     })
+	
 }
 
 
@@ -280,20 +206,3 @@ func GetAllBookings(c *fiber.Ctx) error {
 
 }
 
-func PaymentProcess(c *fiber.Ctx) error {
-
-	var res mpesa.STKPushCallback
-
-	if err := c.BodyParser(&res); err !=nil{
-		return c.JSON(err.Error())
-	}
-
-
-	if(res.Body.STKCallback.ResultCode != 0){
-		return &fiber.Error{}
-	}
-
-	fmt.Printf("%+v", res.Body.STKCallback)
-
-	return nil
-}

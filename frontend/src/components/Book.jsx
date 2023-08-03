@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 
 import "react-toastify/dist/ReactToastify.css";
+
 const Book = () => {
   const param = useParams();
   const navigate = useNavigate();
@@ -167,7 +168,8 @@ const Book = () => {
 
     setSpinner(true);
 
-    const url = "http://localhost:8000/book-parking-space";
+    const bookingurl = "http://localhost:8000/book-parking-space";
+    const stkurl = "http://localhost:8000/send-stkpush";
 
     const formData = new FormData();
     formData.append("date", formattedDate);
@@ -186,22 +188,59 @@ const Book = () => {
     formData.append("parking_duration", totalHours);
     formData.append("total_fees", totalFees);
 
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      //send stkpush request attach phonenumber and amount
+      const stkresponse = await fetch(stkurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          motorist_phonenumber: String(userDetails.phone_number),
+          amount: String(totalFees),
+        }),
+      });
 
-    const data = await response.json();
+      const stkdata = await stkresponse.json();
 
-    //if ok
-    if (data.status === 200) {
-      setTimeout(() => {
-        navigate(`/home/payment-success/${data.booking.ID}`);
-      }, 4000);
+      //if stkpush is sent successfully
+      if (stkdata.status === 200) {
+        //send booking details
+        const bookingResponse = await fetch(bookingurl, {
+          method: "POST",
+          body: formData,
+        });
 
-      setTimeout(() => {
+        const bookingData = await bookingResponse.json();
+
+        //if booking request is successful
+        if (bookingData.status === 200) {
+          setTimeout(() => {
+            navigate(`/home/payment-success/${bookingData.booking.ID}`);
+          }, 4000);
+
+          setTimeout(() => {
+            setSpinner(false);
+          }, 3000);
+        } else {
+          //hidden the spinner
+          setSpinner(false);
+
+          //navigate to the payment-failed page
+          navigate("/home/payment-failed");
+        }
+      } else {
+        //hidden the spinner
         setSpinner(false);
-      }, 3000);
+
+        //navigate to the payment-failed page
+        navigate("/home/payment-failed");
+      }
+    } catch (error) {
+      //console.log err
+      console.log(error);
+      //navigate to the payment-failed page
+      navigate("/home/payment-failed");
     }
   };
 
@@ -221,9 +260,6 @@ const Book = () => {
   if (parkingSpaceData.length === 0 && Object.keys(vehicleData).length === 0) {
     return <Loading />;
   }
-
-  console.log(bookings);
-  console.log(fromTime);
 
   return (
     <>
@@ -311,7 +347,7 @@ const Book = () => {
                 </div>
                 <div className="block text-left">
                   <span className="text-gray-500 dark:text-gray-400 font-medium text-xs">
-                    Car No plate
+                    vehicle model
                   </span>
                   <div className="text-xl font-medium text-gray-900 dark:text-white">
                     {vehicleData.vehicle_model}
@@ -319,7 +355,7 @@ const Book = () => {
                 </div>
                 <div className="block text-left">
                   <span className="text-gray-500 dark:text-gray-400 font-medium text-xs">
-                    Car No plate
+                    vehicle No plate
                   </span>
                   <div className="text-xl font-medium text-gray-900 dark:text-white">
                     {vehicleData.vehicle_plate}

@@ -13,6 +13,7 @@ import Loading from "./Loading";
 import ParkingSucess from "./ParkingSucess";
 import ParkingSpaces from "./ParkingSpaces";
 import PaymentSuccess from "./PaymentSuccess";
+import PaymentFailed from "./PaymentFailed";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ const HomePage = () => {
           <Route path="/receipt" element={<Receipt />} />
           <Route path="/report" element={<Report />} />
           <Route path="/parking-success" element={<ParkingSucess />} />
+          <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/payment-success/:id" element={<PaymentSuccess />} />
           <Route path="/parking-spaces/:id" element={<ParkingSpaces />} />
         </Routes>

@@ -51,7 +51,7 @@ func main() {
 
 	app.Get("/get-booking/:id", controllers.GetBookingData)
 	
-	app.Post("/process-payment", controllers.PaymentProcess)
+	app.Post("/process-payment", controllers.ProcessPayment)
 
 	app.Get("/get-owner-bookings/:id", controllers.GetOwnerBookingData)
 
@@ -59,7 +59,8 @@ func main() {
 
 	app.Post("/forgot-password", controllers.ForgotPassword)
 
-	app.Post("/payment-process", controllers.PaymentProcess)
+
+	app.Post("/send-stkpush", controllers.SendSTKPUSH)
 
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	

@@ -29,7 +29,6 @@ const Dashboard = () => {
         bookings.push(book);
       });
 
-      console.log(bookings);
       setBookingsData(bookings);
       return;
     }
