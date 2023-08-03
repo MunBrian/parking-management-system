@@ -16,8 +16,9 @@ func ConnectionToDB() {
 	password := os.Getenv("PASSWORD")
 	dbname := os.Getenv("DBNAME")
 	port := os.Getenv("DBPORT")
+	host := os.Getenv("HOST")
 
-	dsn := fmt.Sprintf("host=localhost user=%v password=%v dbname=%v port=%v", user, password, dbname, port)
+	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v", host, user, password, dbname, port)
 
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
