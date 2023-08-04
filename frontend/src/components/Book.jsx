@@ -26,7 +26,7 @@ const Book = () => {
 
   //fetch parking
   const fetchParkingSpace = async (id) => {
-    const url = `http://localhost:8000/get-parking/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/get-parking/${id}`;
     const response = await fetch(url);
 
     const data = await response.json();
@@ -39,7 +39,7 @@ const Book = () => {
   //fetch user's vehicle details
   const fetchVehicleDetails = async (id) => {
     try {
-      const url = `http://localhost:8000/get-vehicle/${id}`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/get-vehicle/${id}`;
 
       const response = await fetch(url);
 
@@ -83,7 +83,7 @@ const Book = () => {
 
   //fetch all bookings
   const fetchAllBookings = async () => {
-    const url = "http://localhost:8000/get-all-bookings";
+    const url = `${import.meta.env.VITE_SERVER_URL}/get-all-bookings`;
 
     const response = await fetch(url);
 
@@ -168,8 +168,8 @@ const Book = () => {
 
     setSpinner(true);
 
-    const bookingurl = "http://localhost:8000/book-parking-space";
-    const stkurl = "http://localhost:8000/send-stkpush";
+    const bookingurl = `${import.meta.env.VITE_SERVER_URL}/book-parking-space`;
+    const stkurl = `${import.meta.env.VITE_SERVER_URL}/send-stkpush`;
 
     const formData = new FormData();
     formData.append("date", formattedDate);

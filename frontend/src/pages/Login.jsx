@@ -46,7 +46,7 @@ const Login = () => {
 
     //if form is valid
     try {
-      const url = "http://localhost:8000/login";
+      const url = `${import.meta.env.VITE_SERVER_URL}/login`;
 
       const data = await fetch(url, {
         method: "POST",

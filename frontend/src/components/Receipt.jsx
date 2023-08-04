@@ -39,7 +39,7 @@ const Receipt = () => {
   const fetchBooking = async (id) => {
     setIsLoading(true);
     try {
-      const url = `http://localhost:8000/get-booking/${id}`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/${id}`;
 
       const response = await fetch(url);
 

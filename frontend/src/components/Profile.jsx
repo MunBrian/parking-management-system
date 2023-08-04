@@ -68,7 +68,7 @@ const Profile = () => {
   const handleVehicleUpdate = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:8000/update-vehicle";
+    const url = `${import.meta.env.VITE_SERVER_URL}/update-vehicle`;
 
     const response = await fetch(url, {
       method: "PATCH",
@@ -101,7 +101,7 @@ const Profile = () => {
     console.log(vehicleData);
     e.preventDefault();
 
-    const url = "http://localhost:8000/create-vehicle";
+    const url = `${import.meta.env.VITE_SERVER_URL}/create-vehicle`;
 
     const response = await fetch(url, {
       method: "POST",
@@ -133,7 +133,7 @@ const Profile = () => {
   const handleUserUpdate = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:8000/update-profile";
+    const url = `${import.meta.env.VITE_SERVER_URL}/update-profile`;
 
     const formData = new FormData();
     formData.append("First_name", First_name);
@@ -178,7 +178,7 @@ const Profile = () => {
   //fetch user's vehicle details
   const fetchVehicleDetails = async (id) => {
     try {
-      const url = `http://localhost:8000/get-vehicle/${id}`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/get-vehicle/${id}`;
 
       const response = await fetch(url);
 

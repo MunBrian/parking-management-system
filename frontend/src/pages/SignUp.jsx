@@ -102,7 +102,7 @@ const SignUp = () => {
 
     //if form is valid
     try {
-      const url = "http://localhost:8000/signup";
+      const url = `${import.meta.env.VITE_SERVER_URL}/signup`;
 
       const data = await fetch(url, {
         method: "POST",

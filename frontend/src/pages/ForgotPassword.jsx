@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const url = "http://localhost:8000/forgot-password";
+      const url = `${import.meta.env.VITE_SERVER_URL}/forgot-password`;
 
       //send email backend
       const response = await fetch(url, {

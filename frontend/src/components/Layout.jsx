@@ -22,7 +22,7 @@ const HomePage = () => {
 
   //fetch user data using token
   const fetchUserDetails = async (token) => {
-    const url = "http://localhost:8000/dashboard";
+    const url = `${import.meta.env.VITE_SERVER_URL}/dashboard`;
 
     const headers = {
       Authorization: `Bearer ${token}`,

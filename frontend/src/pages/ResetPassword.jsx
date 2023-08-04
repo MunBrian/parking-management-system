@@ -55,7 +55,7 @@ const ResetPassword = () => {
     const decodedToken = urlBase64Decode(token);
 
     //send request
-    const url = "http://localhost:8000/reset-password";
+    const url = `${import.meta.env.VITE_SERVER_URL}/reset-password`;
 
     const response = await fetch(url, {
       method: "POST",

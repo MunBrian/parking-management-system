@@ -15,7 +15,9 @@ const Report = () => {
 
   //fetch motorist bookings data
   const fetchMotoristBookings = async (id) => {
-    const url = `http://localhost:8000/get-motorist-bookings/${id}`;
+    const url = `${
+      import.meta.env.VITE_SERVER_URL
+    }/get-motorist-bookings/${id}`;
 
     const response = await fetch(url);
 
@@ -37,7 +39,7 @@ const Report = () => {
 
   //fetch owners bookings data
   const fetchOwnerBookings = async (id) => {
-    const url = `http://localhost:8000/get-owner-bookings/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/get-owner-bookings/${id}`;
 
     const response = await fetch(url);
 

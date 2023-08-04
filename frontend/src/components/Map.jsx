@@ -11,7 +11,7 @@ const Map = () => {
   const [userLongitude, setUserLongitude] = useState(null);
   //fetch all parkings
   const fetchAllParkings = async () => {
-    const url = "http://localhost:8000/get-all-parking";
+    const url = `${import.meta.env.VITE_SERVER_URL}/get-all-parking`;
 
     const response = await fetch(url);
 

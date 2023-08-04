@@ -18,7 +18,7 @@ const ParkingSpaces = () => {
   //fetch users parking spaces
   const fetchParkingSpace = async (id) => {
     setIsLoading(true);
-    const url = `http://localhost:8000/get-parking-spaces/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/get-parking-spaces/${id}`;
 
     const response = await fetch(url);
 
@@ -55,7 +55,7 @@ const ParkingSpaces = () => {
 
   //delete parking space
   const deleteParkingSpace = async (id) => {
-    const url = `http://localhost:8000/delete-parking/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/delete-parking/${id}`;
 
     const response = await fetch(url, {
       method: "DELETE",
