@@ -75,7 +75,7 @@ func SendSTKPUSH(c *fiber.Ctx) error{
         PhoneNumber:       uint64(motoristPhoneNumber),
 		//PhoneNumber: 254746344408,
 		//CallBackURL:       "https://example.com",
-       CallBackURL:       "https://ec50-197-237-98-40.ngrok.io/process-payment",
+       CallBackURL:       os.Getenv("CALLBACKURL"),
         AccountReference:  "ParkIt",
         TransactionDesc:   "ParkSpace pay",
     })
