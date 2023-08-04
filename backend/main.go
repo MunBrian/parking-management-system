@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	initializer.LoadEnvVariables()
+	//initializer.LoadEnvVariables()
 	initializer.ConnectionToDB()
 	initializer.SyncDB()
 }
