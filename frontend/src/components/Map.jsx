@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import MapPopup from "./MapPopup";
 import ParkingContext from "../context/ParkingContext";
 import Loading from "./Loading";
+import { Icon } from "leaflet";
 
 const Map = () => {
   const [parkingSpaceData, setParkingSpaceData] = useContext(ParkingContext);
@@ -71,6 +72,11 @@ const Map = () => {
     }
   }
 
+  const customIcon = new Icon({
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/3005/3005366.png",
+    iconSize: [42, 42],
+  });
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -99,6 +105,7 @@ const Map = () => {
                     parseFloat(parking.parking_lat),
                     parseFloat(parking.parking_lng),
                   ]}
+                  icon={customIcon}
                 >
                   <MapPopup key={parking.id} parking={parking} />
                 </Marker>

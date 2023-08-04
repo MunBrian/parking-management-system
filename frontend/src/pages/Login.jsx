@@ -42,8 +42,6 @@ const Login = () => {
       return;
     }
 
-    console.log(formData);
-
     //if form is valid
     try {
       const url = `${import.meta.env.VITE_SERVER_URL}/login`;

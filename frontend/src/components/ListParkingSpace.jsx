@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from "react";
-import ParkingContext from "../context/ParkingContext";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 import UserContext from "../context/UserContext";
+import { Icon } from "leaflet";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -147,7 +147,7 @@ const ListParkingSpace = () => {
 
     setSpinner(true);
 
-    const url = "http://localhost:8000/create-parking-space";
+    const url = `${import.meta.env.VITE_SERVER_URL}/create-parking-space`;
 
     const formData = new FormData();
 
@@ -176,6 +176,11 @@ const ListParkingSpace = () => {
       navigate("/home/parking-success");
     }
   };
+
+  const customIcon = new Icon({
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/3005/3005366.png",
+    iconSize: [42, 42],
+  });
 
   return (
     <>
@@ -224,6 +229,7 @@ const ListParkingSpace = () => {
                           draggable={true}
                           eventHandlers={{ dragend: handleMarkerDrag }}
                           key="draggable-marker"
+                          icon={customIcon}
                         />
                       </MapContainer>
                     </div>
