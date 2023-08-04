@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	initializer.LoadEnvVariables()
+	//initializer.LoadEnvVariables()
 	initializer.ConnectionToDB()
 	initializer.SyncDB()
 }
@@ -70,7 +70,13 @@ func main() {
 	
 	//app.Post("/bookspace", middlewares.RestrictDashboard, controllers.BookParkingSpace)
 
-	err := app.Listen(":8000")
+	port := os.Getenv("PORT")
+
+	if port == ""{
+		port = ":8000"
+	}
+
+	err := app.Listen(port)
 
 	if err != nil {
 		panic(err)
