@@ -20,7 +20,6 @@ const Map = () => {
 
     if (data.status === 200) {
       setParkingSpaceData(data.parkings);
-      console.log(data.parkings);
       return;
     }
   };
@@ -67,7 +66,7 @@ const Map = () => {
         console.log("The request to get user location timed out.");
         break;
       case error.UNKNOWN_ERROR:
-        console.log("An unknown error occurred.");
+        console.log("An error occurred.");
         break;
     }
   }
