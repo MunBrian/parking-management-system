@@ -90,7 +90,7 @@ func SendSTKPUSH(c *fiber.Ctx) error{
 		})
 	}
 
-	fmt.Println(stkPushRes.ResponseCode)
+	log.Println(stkPushRes.ResponseCode)
 
 
 	//check stk response code
@@ -122,7 +122,7 @@ func ProcessPayment(c *fiber.Ctx) error {
 		})
 	}
 
-	log.Println(res);
+	fmt.Println(res);
 
 	type CallBack struct{
 		ResultCode    int    `json:"resultCode"`
