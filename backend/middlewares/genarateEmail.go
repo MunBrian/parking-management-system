@@ -10,6 +10,8 @@ func GenerateEmail(email []string, name, token string) error {
 
 	var err error
 
+	frontendURL := os.Getenv("FRONTENDURL")
+
 	body := fmt.Sprintf(`<html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,11 +26,11 @@ func GenerateEmail(email []string, name, token string) error {
     
     <p>You can reset your password, by click on the link below.</p>
     
-    <a href="http://localhost:5173/reset-password/%v" target="_blank">Password reset</a>
+    <a href="%v/reset-password/%v" target="_blank">Password reset</a>
     
     <p>if you did not make this request, then you can ignore this message. </p>
 </body>
-</html>`, name, token)
+</html>`, name, frontendURL, token)
 
 	auth := smtp.PlainAuth(
 		"",
