@@ -22,7 +22,7 @@ func GenerateEmail(email []string, name, token string) error {
 <body>
 	<p>Hello, %v</p>
 
-    <p>Someone requested a new password for your account on <a href="http://localhost:5173/" target="_blank">Park-It</a></p>
+    <p>Someone requested a new password for your account on <a href="%v" target="_blank">Park-It</a></p>
     
     <p>You can reset your password, by click on the link below.</p>
     
@@ -30,7 +30,7 @@ func GenerateEmail(email []string, name, token string) error {
     
     <p>if you did not make this request, then you can ignore this message. </p>
 </body>
-</html>`, name, frontendURL, token)
+</html>`, name, frontendURL, frontendURL, token)
 
 	auth := smtp.PlainAuth(
 		"",
