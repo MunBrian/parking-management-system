@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github/MunBrian/parking-management-system/controllers"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/middlewares"
@@ -12,7 +13,7 @@ import (
 )
 
 func init() {
-	//initializer.LoadEnvVariables()
+	initializer.LoadEnvVariables()
 	initializer.ConnectionToDB()
 	initializer.SyncDB()
 }
@@ -73,8 +74,10 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == ""{
-		port = "8000"
+		port = ":8000"
 	}
+
+	fmt.Println("Listening on port:", port)
 
 	err := app.Listen(port)
 
