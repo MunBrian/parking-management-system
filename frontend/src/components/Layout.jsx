@@ -14,6 +14,7 @@ import ParkingSucess from "./ParkingSucess";
 import ParkingSpaces from "./ParkingSpaces";
 import PaymentSuccess from "./PaymentSuccess";
 import PaymentFailed from "./PaymentFailed";
+import Navbar from "./Navbar";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -77,10 +78,11 @@ const HomePage = () => {
   }
 
   return (
-    <>
+    <div className="relative mt-20 md:mt-0">
+      <Navbar />
       <Sidebar />
       <div
-        className="fixed top-0 w-4/5 right-0 overflow-auto h-screen bg-gray-50 dark:bg-gray-900 transition-transform -translate-x-full sm:translate-x-0 p-10"
+        className="w-auto overscroll-x-none p-4 md:fixed md:top-0 lg:w-4/5 md:w-10/12 md:right-0 md:overflow-auto md:h-screen bg-gray-50 dark:bg-gray-900  lg:p-10 md:px-3 md:py-6"
         aria-label="Sidenav"
       >
         <Routes>
@@ -98,7 +100,7 @@ const HomePage = () => {
           <Route path="/parking-spaces/:id" element={<ParkingSpaces />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 };
 

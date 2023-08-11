@@ -24,8 +24,6 @@ const ParkingSpaces = () => {
 
     const data = await response.json();
 
-    console.log(data);
-
     if (data.status === 200) {
       const parkingSpaces = [];
 
@@ -35,7 +33,6 @@ const ParkingSpaces = () => {
         parkingSpaces.push(parking);
       });
 
-      console.log(parkingSpaces);
       setParkingSpaceData(parkingSpaces);
       setIsLoading(false);
       return;
@@ -95,8 +92,6 @@ const ParkingSpaces = () => {
     }
   };
 
-  console.log(parkingSpaceData);
-
   return (
     <>
       {isLoading ? (
@@ -108,7 +103,7 @@ const ParkingSpaces = () => {
               <h3 className="text-3xl font-bold dark:text-white">
                 Parking Spaces
               </h3>
-              <div className="grid grid-cols-2 gap-2 my-8">
+              <div className="block md:grid md:grid-cols-2 md:gap-2 my-4 space-y-3 md:space-y-0 md:my-8">
                 {parkingSpaceData.map((space) => (
                   <ParkingSpaceCard
                     key={space.ID}

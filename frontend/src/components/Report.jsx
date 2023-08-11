@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import BookingsContext from "../context/BookingsContext";
 import UserContext from "../context/UserContext";
 import Lottie from "lottie-react";
@@ -48,15 +48,12 @@ const Report = () => {
     if (data.status === 200) {
       const bookings = [];
 
-      console.log(data.bookings);
-
       let bookingData = Array.from(data.bookings);
 
       bookingData.forEach((book) => {
         bookings.push(book);
       });
 
-      console.log(bookings);
       setBookingsData(bookings);
       return;
     }
@@ -78,7 +75,7 @@ const Report = () => {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (userDetails.userCategory == "motorist") {
       fetchMotoristBookings(userDetails.id);
     }
@@ -124,7 +121,7 @@ const Report = () => {
         <h3 className="text-3xl font-bold dark:text-white">Report</h3>
       </div>
 
-      <div className="relative overflow-x-auto">
+      <div className="relative">
         <div className="flex items-center justify-between pb-4">
           <div>
             <button
@@ -152,7 +149,7 @@ const Report = () => {
             </button>
           </div>
         </div>
-        <div id="receipt">
+        <div id="receipt" className="overflow-x-auto">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>

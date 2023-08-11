@@ -25,7 +25,7 @@ const TimePicker = ({
   };
 
   return (
-    <div className="block space-y-2 py-2">
+    <div className="lg:block space-y-2 py-2 md:flex md:justify-between md:items-center">
       <div className="flex space-x-2">
         <div>
           <label

@@ -84,8 +84,8 @@ const Map = () => {
             Choose a Parking Spot
           </h3>
         </div>
-        <div className="">
-          <div className="h-screen w-full">
+        <div className="relative md:-z-0 z-10">
+          <div className="h-screen">
             <MapContainer
               center={
                 // userLatitude
@@ -100,6 +100,7 @@ const Map = () => {
               />
               {parkingSpaceData.map((parking) => (
                 <Marker
+                  key={parking.id}
                   position={[
                     parseFloat(parking.parking_lat),
                     parseFloat(parking.parking_lng),

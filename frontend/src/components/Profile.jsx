@@ -4,12 +4,11 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "./Loading";
 
 const Profile = () => {
   const param = useParams();
 
-  const { userDetails, setUserDetails, setVehicleDetails, vehicleDetails } =
+  const { userDetails, setUserDetails, setVehicleDetails } =
     useContext(UserContext);
 
   const [active, setActive] = useState(false);
@@ -97,6 +96,7 @@ const Profile = () => {
     }
   };
 
+  //create vehicle
   const handleVehicleCreate = async (e) => {
     console.log(vehicleData);
     e.preventDefault();
@@ -130,6 +130,7 @@ const Profile = () => {
     }
   };
 
+  //update user details
   const handleUserUpdate = async (e) => {
     e.preventDefault();
 
@@ -171,10 +172,7 @@ const Profile = () => {
 
       return;
     }
-
-    console.log({ ...formData, Profilepic: selectedFile });
   };
-
   //fetch user's vehicle details
   const fetchVehicleDetails = async (id) => {
     try {
@@ -238,16 +236,6 @@ const Profile = () => {
     return "jpeg"; // Default to JPEG if the format is not recognized
   }
 
-  // if (
-  //   userDetails.userCategory === "motorist" &&
-  //   Object.keys(vehicleDetails).length === 0
-  // ) {
-  //   return <Loading />;
-  // }
-
-  console.log(userDetails.id);
-  console.log(vehicleData);
-  console.log(vehicleDetails);
   return (
     <>
       <div className="flex items-start mb-8">
@@ -289,7 +277,9 @@ const Profile = () => {
             ></input>
           </div>
         </div>
-        <h3 className="text-xl font-bold dark:text-white">Personal Details</h3>
+        <h3 className="text-xl font-bold dark:text-white mt-4 md:mt-0">
+          Personal Details
+        </h3>
         <div className="grid md:grid-cols-2 md:gap-6 py-5 mt-5 border-t  border-gray-200 dark:border-gray-700">
           <div>
             <label

@@ -128,5 +128,6 @@ func UpdateVehicle(c* fiber.Ctx) error {
 	//send vehicle
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status": fiber.StatusOK,
+		"vehicle": vehicle,
 	})
 }

@@ -196,11 +196,11 @@ const ListParkingSpace = () => {
                 <div className="overflow-x-auto">
                   <div className="flex justify-between items-center mb-8">
                     <div>
-                      <h3 className="text-xl font-bold dark:text-white py-2">
+                      {/* <h3 className="text-xl font-bold dark:text-white py-2">
                         Is the pin in the right place?
-                      </h3>
+                      </h3> */}
                       <span className="dark:text-white">
-                        If you need, drag the pin to the right location
+                        Please drag the pin to the precise location on the map.
                       </span>
                     </div>
                     <div>
@@ -416,7 +416,7 @@ const ListParkingSpace = () => {
                     </label>
                   </div>
                 </div>
-                <div className="text-end">
+                <div className="text-end mt-3">
                   <button
                     type="submit"
                     className=" text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

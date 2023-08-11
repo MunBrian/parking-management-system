@@ -81,8 +81,8 @@ const Login = () => {
   };
 
   return (
-    <main className="grid grid-cols-2 w-screen h-screen">
-      <section className="bg-center bg-cover bg-no-repeat bg-[url('/assets/images/carpark.jpg')] bg-gray-700 bg-blend-multiply flex items-center">
+    <main className="lg:grid lg:grid-cols-2 w-screen h-screen">
+      <section className="hidden bg-center bg-cover bg-no-repeat bg-[url('/assets/images/carpark.jpg')] bg-gray-700 bg-blend-multiply lg:flex lg:items-center">
         <div className="px-4 max-w-screen-xl text-center py-24 lg:py-56">
           <h1 className="mb-4 text-3xl font-extrabold tracking-wide text-white md:text-5xl lg:text-6xl">
             Park-It
@@ -93,7 +93,13 @@ const Login = () => {
         </div>
       </section>
       <div className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+          <h1 className="lg:hidden md:block mb-4 text-3xl font-extrabold tracking-wide text-white md:text-5xl lg:text-6xl">
+            Park-It
+          </h1>
+          <p className="lg:hidden md:block mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+            Find the perfect parking spot within the city.
+          </p>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

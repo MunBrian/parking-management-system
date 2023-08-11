@@ -39,7 +39,7 @@ const Receipt = () => {
   const fetchBooking = async (id) => {
     setIsLoading(true);
     try {
-      const url = `${import.meta.env.VITE_SERVER_URL}/${id}`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/get-booking/${id}`;
 
       const response = await fetch(url);
 
@@ -86,6 +86,7 @@ const Receipt = () => {
     refNo = parts[0].trim();
   }
 
+  console.log(booked);
   return (
     <>
       {isLoading ? (

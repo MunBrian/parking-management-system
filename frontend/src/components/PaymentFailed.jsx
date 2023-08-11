@@ -7,10 +7,8 @@ import Failed from "../assets/animations/payment-failed.json";
 const PaymentFailed = () => {
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-white dark:bg-gray-800">
-      <h2 className="dark:text-white font-semibold text-2xl">
-        Payment Failed!!
-      </h2>
-      <Lottie animationData={Failed} loop={true} className="w-72" />
+      <h2 className="font-bold text-3xl text-red-500">Payment Failed!!</h2>
+      <Lottie animationData={Failed} loop={true} className="w-80" />
       <Link
         to="/home/map"
         className="mb-1 text-xl underline font-medium text-gray-900 dark:text-white"

@@ -15,7 +15,7 @@ const Book = () => {
 
   const { userDetails } = useContext(UserContext);
 
-  const [parkingSpaceData, setParkingSpaceData] = useState([]);
+  const [parkingSpaceData, setParkingSpaceData] = useState({});
   const [vehicleData, setVehicleData] = useState({});
   const [parkingSlot, setParkingSlot] = useState(null);
   const [bookings, setBookings] = useState([]);
@@ -33,6 +33,7 @@ const Book = () => {
 
     if (data.status === 200) {
       setParkingSpaceData(data.parking);
+      return;
     }
   };
 
@@ -257,7 +258,10 @@ const Book = () => {
     fetchAllBookings();
   }, []);
 
-  if (parkingSpaceData.length === 0 && Object.keys(vehicleData).length === 0) {
+  if (
+    Object.keys(parkingSpaceData).length === 0 &&
+    Object.keys(vehicleData).length === 0
+  ) {
     return <Loading />;
   }
 
@@ -282,7 +286,7 @@ const Book = () => {
               Book Parking Space
             </h3>
           </div>
-          <div className="grid gap-x-2 grid-cols-3">
+          <div className="lg:grid lg:gap-x-2 lg:grid-cols-3 md:block">
             <div className="col-span-2 block p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <h3 className="text-xl font-semibold dark:text-gray-200">
                 Pick a Parking Slot
@@ -300,12 +304,12 @@ const Book = () => {
                 )}
               </div>
             </div>
-            <div className="block p-4 text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="block p-4 mt-4 lg:mt-0 text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <h3 className="text-xl font-semibold dark:text-gray-200">
                 Booking Details
               </h3>
-              <div className="flex flex-col space-y-5 mt-5 border-t border-gray-700 dark:border-gray-200 p-5">
-                <div className="block text-left">
+              <div className="lg:flex lg:flex-col md:grid md:grid-cols-2 space-y-5 mt-5 border-t border-gray-700 dark:border-gray-200 p-5">
+                <div className="block text-left md:mt-5 lg:mt-0">
                   <span className="text-gray-500 dark:text-gray-400 font-medium text-xs">
                     Parking Name
                   </span>
@@ -361,7 +365,7 @@ const Book = () => {
                     {vehicleData.vehicle_plate}
                   </div>
                 </div>
-                <div className="block text-left">
+                <div className="block text-left md:col-span-2">
                   <span className="text-gray-500 dark:text-gray-400 font-medium text-xs">
                     Pick Time
                   </span>
@@ -378,7 +382,7 @@ const Book = () => {
                   <span className="text-gray-500 dark:text-gray-400 font-medium text-xs">
                     Total
                   </span>
-                  <div className="text-xl font-medium text-gray-900 dark:text-white">
+                  <div className="text-2xl font-medium text-gray-900 dark:text-white">
                     {totalFees}
                   </div>
                 </div>
