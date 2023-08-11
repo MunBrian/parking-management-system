@@ -36,7 +36,7 @@ const Navbar = () => {
           <svg
             fill="none"
             stroke="currentColor"
-            className="w-8 h-8 text-gray-100 transition duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white"
+            className="w-8 h-8 text-gray-700 transition duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white"
             stroke-width="1.5"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"

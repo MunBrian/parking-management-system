@@ -81,7 +81,7 @@ const Sidebar = () => {
               fill="currentColor"
               stroke="currentColor"
               stroke-width="1.5"
-              className="w-8 h-8 text-gray-100 lg:hidden duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white"
+              className="w-8 h-8 text-gray-700 lg:hidden duration-75 dark:text-gray-100 group-hover:text-white dark:group-hover:text-white"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
