@@ -4,9 +4,9 @@
 ## Description
 - Park-It is a parking management system that helps motorist quickly find parking spots within the city.
 - Park-It also helps parking owners track their parking spaces from money collection, parking space report genration and many more features.
-- Park-It has also ensured security by implementing JWT.
+- Park-It has also has addressed authentication and authorization security issues by implementing JWT.
 - Park-It is reponsive across different devices from desktop, tablet to mobile phones.
-- Park-It also support light and dark mode.
+- Park-It also supports light and dark mode.
   
 Park-It features include:
 
@@ -51,10 +51,10 @@ Park-It features include:
 <ins>Payment Platform.</ins>
 * [Mpesa](https://www.safaricom.co.ke/personal/m-pesa/do-more-with-m-pesa)
 
-<ins>Hosting.</ins>
-* Vercel - Frontend
-* Railway - Backend
-* Amazon RDS - Postgresql hosting
+<ins>Hosting and Deployment</ins>
+* [Vercel](https://vercel.com) - Frontend Deployment
+* [Railway](https://railway.app/) - Backend Deployment
+* [Amazon RDS](https://aws.amazon.com/rds/) - Postgresql Database hosting
 
 ## Getting started
 
