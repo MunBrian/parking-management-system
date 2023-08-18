@@ -276,7 +276,7 @@ const Book = () => {
             <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
               <Link to={`/home/profile/${userDetails.id}`}>
                 <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
-                  To continue, Finish Setting Up Your Profile
+                  Please Finish Setting Up Your Profile
                 </h3>
               </Link>
             </div>

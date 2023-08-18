@@ -110,7 +110,7 @@ const Receipt = () => {
                   ></path>
                 </svg>
                 <h5 className="mb-2 text-md font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                  Payment Success!
+                  Payment Successful!
                 </h5>
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   KSH. {booked.total_fees}

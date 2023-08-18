@@ -84,6 +84,17 @@ const ListParkingSpace = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    if (userDetails.national_id === "") {
+      //send success message
+      toast.error("Please finish setting up your profile", {
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+
+      return;
+    }
+
     if (parkingImages.length === 0) {
       //send success message
       toast.error("Please choose parking images", {
@@ -239,6 +250,15 @@ const ListParkingSpace = () => {
             </>
           ) : (
             <>
+              {userDetails.national_id === "" && (
+                <div className="p-3 bg-red-500 text-white text-center my-2 rounded-md">
+                  <Link to={`/home/profile/${userDetails.id}`}>
+                    <h3 className="text-lg font-semibold dark:text-white underline underline-offset-2">
+                      Please Finish Setting Up Your Profile
+                    </h3>
+                  </Link>
+                </div>
+              )}
               <div className="flex items-start mb-8">
                 <h3 className="text-3xl font-bold dark:text-white">
                   List Parking Space
@@ -434,5 +454,3 @@ const ListParkingSpace = () => {
 };
 
 export default ListParkingSpace;
-
-//export default ListParkingSpace;
