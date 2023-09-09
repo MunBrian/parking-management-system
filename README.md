@@ -149,6 +149,6 @@ FRONTENDURL="http://localhost:5173"
   ![Screenshot (56)](https://github.com/MunBrian/parking-management-system/assets/63002200/a3803a30-06b3-471a-9def-4b18d491e567)
 
 ## Contact
-If you have any questions or feedback about this project you can contact me at my email address 
+If you have any questions or feedback about this project you can contact me via my email address 
 [bk.mungai254@gmail.com](mailto:bk.mungai254@gmail.com)
 
