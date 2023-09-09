@@ -20,7 +20,7 @@ const data = [
   { day: "Saturday", spent: 9000 },
   { day: "Sunday", spent: 7500 },
 ];
-const MotoristBarChart = () => {
+const DashboardBarChart = () => {
   const [bookingsData] = useContext(BookingsContext);
 
   const updatedData = data.map((item) => {
@@ -55,4 +55,4 @@ const MotoristBarChart = () => {
   );
 };
 
-export default MotoristBarChart;
+export default DashboardBarChart;

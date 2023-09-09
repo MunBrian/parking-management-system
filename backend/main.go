@@ -46,13 +46,14 @@ func main() {
 	
 	app.Delete("/delete-parking/:id", controllers.DeleteParkingSpace)
 
-	app.Post("/book-parking-space", controllers.BookParkingSpace)
-
+	
 	app.Get("/get-motorist-bookings/:id", controllers.GetMotoristBookingData)
-
+	
 	app.Get("/get-booking/:id", controllers.GetBookingData)
 	
 	app.Post("/process-payment", controllers.ProcessPayment)
+	
+	app.Post("/book-parking-space", controllers.BookParkingSpace)
 
 	app.Get("/get-owner-bookings/:id", controllers.GetOwnerBookingData)
 
@@ -60,8 +61,7 @@ func main() {
 
 	app.Post("/forgot-password", controllers.ForgotPassword)
 
-
-	app.Post("/send-stkpush", controllers.SendSTKPUSH)
+	app.Post("/send-stkpush", controllers.SendSTKPUSH)	
 
 	app.Use(jwtware.New(jwtware.Config{SigningKey: []byte(os.Getenv("SECRET"))}))
 	
@@ -69,7 +69,6 @@ func main() {
 
 	app.Post("/reset-password", middlewares.ValidateToken, controllers.ResetPassword)
 	
-	//app.Post("/bookspace", middlewares.RestrictDashboard, controllers.BookParkingSpace)
 
 	port := os.Getenv("PORT")
 

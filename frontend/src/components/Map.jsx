@@ -8,8 +8,8 @@ import { Icon } from "leaflet";
 
 const Map = () => {
   const [parkingSpaceData, setParkingSpaceData] = useContext(ParkingContext);
-  const [userLatitude, setUserLatitude] = useState(null);
-  const [userLongitude, setUserLongitude] = useState(null);
+  const [userLatitude, setUserLatitude] = useState(null || -1.2882);
+  const [userLongitude, setUserLongitude] = useState(null || 36.8233);
   //fetch all parkings
   const fetchAllParkings = async () => {
     const url = `${import.meta.env.VITE_SERVER_URL}/get-all-parking`;
@@ -89,7 +89,7 @@ const Map = () => {
             <MapContainer
               center={
                 // userLatitude
-                [-1.2882, 36.8233]
+                [userLatitude, userLongitude]
               }
               zoom={10}
               className="h-full"

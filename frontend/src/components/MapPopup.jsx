@@ -49,24 +49,24 @@ const MapPopup = ({ parking }) => {
             </div>
             {/* add more images to the carousel */}
           </Carousel>
-          <div class="p-5 text-center">
-            <h5 class="text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white">
+          <div className="p-5 text-center">
+            <h5 className="text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white">
               {parking.parking_name}
             </h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {parking.parking_street}, {parking.parking_city}
             </p>
-            <p class="mb-3 font-normal text-gray-900 dark:text-gray-100">
+            <p className="mb-3 font-normal text-gray-900 dark:text-gray-100">
               ksh {parking.parking_fee}/h
             </p>
             <Link
               to={`/home/book/${parking.ID}`}
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700"
+              className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700"
             >
               Book
               <svg
                 aria-hidden="true"
-                class="w-4 h-4 ml-2 -mr-1"
+                className="w-4 h-4 ml-2 -mr-1"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

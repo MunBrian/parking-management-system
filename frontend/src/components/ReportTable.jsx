@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import BookingsContext from "../context/BookingsContext";
+import React from "react";
 
-const MotoristDashboardTable = () => {
-  const [bookingsData] = useContext(BookingsContext);
-  const lastFourBookings = bookingsData.slice(-4).reverse();
+const ReportTable = ({ bookings }) => {
   return (
-    <div className="relative overflow-x-auto">
+    <div className="overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -13,18 +10,24 @@ const MotoristDashboardTable = () => {
               Date
             </th>
             <th scope="col" className="px-6 py-3">
-              Duration
+              Parking Name
             </th>
             <th scope="col" className="px-6 py-3">
-              Parking Space
+              Parking Address
             </th>
             <th scope="col" className="px-6 py-3">
-              Total Cost
+              Parking Slot
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Parking Duration
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Total Charges
             </th>
           </tr>
         </thead>
         <tbody>
-          {lastFourBookings.map((booking) => (
+          {bookings.map((booking) => (
             <tr
               key={booking.ID}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -35,8 +38,10 @@ const MotoristDashboardTable = () => {
               >
                 {booking.date}
               </th>
-              <td className="px-6 py-4">{booking.parking_duration} hr</td>
               <td className="px-6 py-4">{booking.parking_name}</td>
+              <td className="px-6 py-4">{booking.parking_address}</td>
+              <td className="px-6 py-4">{booking.parking_slot}</td>
+              <td className="px-6 py-4">{booking.parking_duration} hr</td>
               <td className="px-6 py-4">ksh {booking.total_fees}</td>
             </tr>
           ))}
@@ -46,4 +51,4 @@ const MotoristDashboardTable = () => {
   );
 };
 
-export default MotoristDashboardTable;
+export default ReportTable;

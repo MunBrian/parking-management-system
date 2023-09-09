@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import SideNavContext from "../context/SideNavContext";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -22,7 +23,8 @@ const Sidebar = () => {
   const { firstName, lastName, email, profilepic, userCategory } = userData;
 
   const handleLogout = () => {
-    localStorage.removeItem("user-data");
+    //remove cookies
+    Cookies.remove("token");
 
     setUserDetails({});
 

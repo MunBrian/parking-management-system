@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github/MunBrian/parking-management-system/initializer"
 	"github/MunBrian/parking-management-system/models"
 	"strconv"
@@ -12,6 +13,17 @@ import (
 
 
 func BookParkingSpace(c *fiber.Ctx) error {
+
+	if MpesaResultCode != 0 {
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"Status":  fiber.StatusBadRequest,
+			"message": "Payment Failed",
+		})
+	}
+
+	
+	fmt.Printf("%v from booking.", MpesaResultCode);
 
 	// Parse multi-part form data
     form, err := c.MultipartForm()

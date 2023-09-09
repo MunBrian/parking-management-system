@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -12,6 +11,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/jwambugu/mpesa-golang-sdk"
 )
+
+const MpesaResultKey = "mpesaResult"
+var MpesaResultCode int;
 
 //send stkpush
 func SendSTKPUSH(c *fiber.Ctx) error{
@@ -36,15 +38,15 @@ func SendSTKPUSH(c *fiber.Ctx) error{
 	}
 
 
-	totalFees, err :=  strconv.Atoi(stkData.TotalFees)
+	//totalFees, err :=  strconv.Atoi(stkData.TotalFees)
 
-	if err != nil {
-		// Handle the error, such as logging or returning an error response
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"status":  fiber.StatusInternalServerError,
-			"message": "Failed to convert motorist phone number",
-		})
-	}
+	// if err != nil {
+	// 	// Handle the error, such as logging or returning an error response
+	// 	return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+	// 		"status":  fiber.StatusInternalServerError,
+	// 		"message": "Failed to convert motorist phone number",
+	// 	})
+	// }
 
 	motoristPhoneNumber, err :=  strconv.Atoi(stkData.PhoneNumber)
 	if err != nil {
@@ -68,14 +70,14 @@ func SendSTKPUSH(c *fiber.Ctx) error{
     stkPushRes, err := mpesaApp.STKPush(ctx, passKey, mpesa.STKPushRequest{
         BusinessShortCode: 174379,
         TransactionType:   "CustomerPayBillOnline",
-        Amount:           	uint(totalFees),	 
-		
+        //Amount:           	uint(totalFees),	 
+		Amount: 1,
         PartyA:            254746344408,
         PartyB:            174379,
         PhoneNumber:       uint64(motoristPhoneNumber),
 		//PhoneNumber: 254746344408,
-		//CallBackURL:       "https://example.com",
-       CallBackURL:       os.Getenv("CALLBACKURL"),
+		// CallBackURL:       "https://example.com",
+       	CallBackURL:       os.Getenv("CALLBACKURL"),
         AccountReference:  "ParkIt",
         TransactionDesc:   "ParkSpace pay",
     })
@@ -90,7 +92,7 @@ func SendSTKPUSH(c *fiber.Ctx) error{
 		})
 	}
 
-	log.Println(stkPushRes.ResponseCode)
+	fmt.Println(stkPushRes.ResponseCode)
 
 
 	//check stk response code
@@ -110,7 +112,6 @@ func SendSTKPUSH(c *fiber.Ctx) error{
 }
 
 
-
 // ProcessPayment handles the Mpesa STK Push Callback.
 func ProcessPayment(c *fiber.Ctx) error {
 	var res mpesa.STKPushCallback
@@ -122,7 +123,6 @@ func ProcessPayment(c *fiber.Ctx) error {
 		})
 	}
 
-	fmt.Println(res);
 
 	type CallBack struct{
 		ResultCode    int    `json:"resultCode"`
@@ -137,35 +137,25 @@ func ProcessPayment(c *fiber.Ctx) error {
 	}
 
 
-	fmt.Println(sendResult)
+	fmt.Printf("%v, from validate", sendResult.ResultCode)
 
 	
-	type Success struct {
-		Message string
-	}
-
-	SucessMessage := Success {
-		Message: "Payment Sucess",
-	}
-	
-	FailureMessage := Success {
-		Message: "Payment Failed",
-	}
-
-
-	if(sendResult.ResultCode != 0){
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"Status":  fiber.StatusBadRequest,
-			"message": FailureMessage,
+	if(sendResult.ResultCode == 0){
+		MpesaResultCode = sendResult.ResultCode;
+		return c.Status(fiber.StatusAccepted).JSON(fiber.Map{
+			"Status":  fiber.StatusAccepted,
+			"message": "Payment Successfull",
 		})	
 	}
 
+	MpesaResultCode = 1032;
 
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"Status":  fiber.StatusOK,
-		"message": SucessMessage,
+	return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+		"Status":  fiber.StatusBadRequest,
+		"message": "Payment Failed",
 	})
 
 }
+
 
 

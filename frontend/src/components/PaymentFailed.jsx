@@ -7,7 +7,10 @@ import Failed from "../assets/animations/payment-failed.json";
 const PaymentFailed = () => {
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-white dark:bg-gray-800">
-      <h2 className="font-bold text-3xl text-red-500">Payment Failed!!</h2>
+      <h2 className="font-bold text-3xl text-red-500">
+        Payment Unsuccessful!!
+      </h2>
+      <h4 className="font-bold text-xl text-red-500">Please try again.</h4>
       <Lottie animationData={Failed} loop={true} className="w-80" />
       <Link
         to="/home/map"

@@ -1,9 +1,9 @@
 import { useContext, useLayoutEffect } from "react";
 import UserContext from "../context/UserContext";
-import MotoristBarChart from "./MotoristBarChart";
-import MotoristDashboardTable from "./MotoristDashboardTable";
 import BookingsContext from "../context/BookingsContext";
 import Loading from "./Loading";
+import DashboardBarChart from "./DashboardBarChart";
+import DashboardTable from "./DashboardTable";
 
 const Dashboard = () => {
   const [bookingsData, setBookingsData] = useContext(BookingsContext);
@@ -129,14 +129,14 @@ const Dashboard = () => {
           <div>
             {userDetails.userCategory === "motorist" ? (
               <h5 className="mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                Money spent this week
+                Weekly Money Spending Distribution
               </h5>
             ) : (
               <h5 className="mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-gray-400">
-                Money Collected this week
+                Weekly Money Collection Distribution
               </h5>
             )}
-            <MotoristBarChart />
+            <DashboardBarChart />
           </div>
         </div>
         <div className="p-4 mt-4 lg:mt-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -144,7 +144,7 @@ const Dashboard = () => {
             <h5 className="mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-gray-400">
               Last 5 bookings
             </h5>
-            <MotoristDashboardTable />
+            <DashboardTable />
           </div>
         </div>
       </div>

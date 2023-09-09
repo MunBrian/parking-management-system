@@ -68,11 +68,7 @@ const SignUp = () => {
     }
 
     //validate phone number must be of Kenyan origin
-    if (
-      !/^(?:254)((?:(?:7(?:(?:[01249][0-9])|(?:5[789])|(?:6[89])))|(?:1(?:[1][0-5])))[0-9]{6})$/.test(
-        phone_number
-      )
-    ) {
+    if (!/^(?:7|1)\d{8}$/.test(phone_number)) {
       setErr((prevState) => ({
         ...prevState,
         phoneNumberErr: true,
@@ -109,7 +105,11 @@ const SignUp = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...formData, user_category: "motorist" }),
+        body: JSON.stringify({
+          ...formData,
+          user_category: "motorist",
+          phone_number: "254" + phone_number,
+        }),
       });
 
       const response = await data.json();
@@ -173,7 +173,7 @@ const SignUp = () => {
                 action="#"
                 onSubmit={handleSubmit}
               >
-                <div className="grid gap-6 mb-6 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div>
                     <label
                       for="first_name"
@@ -253,21 +253,28 @@ const SignUp = () => {
                         : "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     }
                   >
-                    Safaricom mobile number
+                    Mpesa mobile number
                   </label>
-                  <input
-                    type="text"
-                    name="phone_number"
-                    onChange={handleChange}
-                    value={phone_number}
-                    className={
-                      phoneNumberErr
-                        ? "text-gray-900 dark:text-white border-red-500 block w-full p-2.5 rounded-lg bg-gray-50 dark:bg-gray-700"
-                        : "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    }
-                    placeholder="254712345600, must start with 254"
-                    required
-                  />
+                  <div className="flex gap-2">
+                    <input
+                      className="w-1/6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400"
+                      placeholder="+254"
+                      disabled
+                    />
+                    <input
+                      type="text"
+                      name="phone_number"
+                      onChange={handleChange}
+                      value={phone_number}
+                      className={
+                        phoneNumberErr
+                          ? "text-gray-900 dark:text-white border-red-500 block w-5/6 p-2.5 rounded-lg bg-gray-50 dark:bg-gray-700"
+                          : "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-5/6 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      }
+                      placeholder="71234578"
+                      required
+                    />
+                  </div>
                   <p
                     className={
                       phoneNumberErr
@@ -275,7 +282,7 @@ const SignUp = () => {
                         : "hidden"
                     }
                   >
-                    Please input a valid safaricom phonenumber
+                    Please input a valid Mpesa phonenumber
                   </p>
                 </div>
                 <div>

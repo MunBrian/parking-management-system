@@ -86,7 +86,6 @@ const Receipt = () => {
     refNo = parts[0].trim();
   }
 
-  console.log(booked);
   return (
     <>
       {isLoading ? (
@@ -190,7 +189,7 @@ const Receipt = () => {
                     viewBox="0 0 24 24"
                     width="24"
                     height="24"
-                    class="main-grid-item-icon"
+                    className="main-grid-item-icon"
                     fill="none"
                     stroke="currentColor"
                     stroke-linecap="round"

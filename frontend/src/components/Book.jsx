@@ -204,32 +204,43 @@ const Book = () => {
 
       const stkdata = await stkresponse.json();
 
+      // const callBackResponse = await fetch(import.meta.env.VITE_CALLBACK_URL, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+
+      // console.log(callBackResponse);
+
       //if stkpush is sent successfully
       if (stkdata.status === 200) {
         //send booking details
-        const bookingResponse = await fetch(bookingurl, {
-          method: "POST",
-          body: formData,
-        });
+        setTimeout(async () => {
+          let bookingResponse = await fetch(bookingurl, {
+            method: "POST",
+            body: formData,
+          });
+          const bookingData = await bookingResponse.json();
 
-        const bookingData = await bookingResponse.json();
+          if (bookingData.status === 200) {
+            setTimeout(() => {
+              navigate(`/home/payment-success/${bookingData.booking.ID}`);
+            }, 4000);
+
+            setTimeout(() => {
+              setSpinner(false);
+            }, 3000);
+          } else {
+            //hidden the spinner
+            setSpinner(false);
+
+            //navigate to the payment-failed page
+            navigate("/home/payment-failed");
+          }
+        }, 30000);
 
         //if booking request is successful
-        if (bookingData.status === 200) {
-          setTimeout(() => {
-            navigate(`/home/payment-success/${bookingData.booking.ID}`);
-          }, 4000);
-
-          setTimeout(() => {
-            setSpinner(false);
-          }, 3000);
-        } else {
-          //hidden the spinner
-          setSpinner(false);
-
-          //navigate to the payment-failed page
-          navigate("/home/payment-failed");
-        }
       } else {
         //hidden the spinner
         setSpinner(false);

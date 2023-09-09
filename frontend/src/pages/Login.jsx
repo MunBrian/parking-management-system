@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,10 +67,10 @@ const Login = () => {
         return;
       }
 
-      localStorage.setItem("user-data", response.token);
-
       //if valid,. navigate to home page
       navigate("/home/");
+
+      Cookies.set("token", response.token, { expires: 3 });
     } catch (error) {
       console.log(error);
     }

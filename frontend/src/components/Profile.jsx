@@ -98,7 +98,6 @@ const Profile = () => {
 
   //create vehicle
   const handleVehicleCreate = async (e) => {
-    console.log(vehicleData);
     e.preventDefault();
 
     const url = `${import.meta.env.VITE_SERVER_URL}/create-vehicle`;
@@ -145,7 +144,6 @@ const Profile = () => {
     formData.append("ID", param.id);
     formData.append("Profilepic", selectedFile);
 
-    console.log(formData);
     const response = await fetch(url, {
       method: "PATCH",
       body: formData,
@@ -264,13 +262,13 @@ const Profile = () => {
         <div>
           <div>
             <label
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               for="file_input"
             >
               Choose photo
             </label>
             <input
-              class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-primary-700 dark:border-gray-600 dark:placeholder-gray-400"
+              className="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-primary-700 dark:border-gray-600 dark:placeholder-gray-400"
               id="file_input"
               onChange={handleFileChange}
               type="file"
@@ -280,7 +278,7 @@ const Profile = () => {
         <h3 className="text-xl font-bold dark:text-white mt-4 md:mt-0">
           Personal Details
         </h3>
-        <div className="grid md:grid-cols-2 md:gap-6 py-5 mt-5 border-t  border-gray-200 dark:border-gray-700">
+        <div className="grid md:grid-cols-2 md:gap-6 py-5 mt-5 border-t space-y-4 md:space-y-0 border-gray-200 dark:border-gray-700">
           <div>
             <label
               for="first_name"
@@ -394,7 +392,7 @@ const Profile = () => {
                 Vehicle Details
               </h3>
               <form action="" onSubmit={handleVehicleCreate}>
-                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
+                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t space-y-4 md:space-y-0 border-gray-200 dark:border-gray-700">
                   <div>
                     <label
                       for="car_model"
@@ -458,7 +456,7 @@ const Profile = () => {
                 Vehicle Details
               </h3>
               <form action="" onSubmit={handleVehicleUpdate}>
-                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t border-gray-200 dark:border-gray-700">
+                <div className="grid md:grid-cols-2 md:gap-6 pt-5 mt-5 border-t space-y-4 md:space-y-0 border-gray-200 dark:border-gray-700">
                   <div>
                     <label
                       for="car_model"

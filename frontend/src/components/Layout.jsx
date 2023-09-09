@@ -15,6 +15,7 @@ import ParkingSpaces from "./ParkingSpaces";
 import PaymentSuccess from "./PaymentSuccess";
 import PaymentFailed from "./PaymentFailed";
 import Navbar from "./Navbar";
+import Cookies from "js-cookie";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const HomePage = () => {
     const response = await fetch(url, { headers });
 
     if (response.status === 401) {
+      navigate("/login");
       const errorResponse = await response.json();
       const errorMessage = errorResponse.message;
       throw new Error(errorMessage);
@@ -43,8 +45,8 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    //get token from local storage
-    const userToken = localStorage.getItem("user-data");
+    //get token from Cookies
+    let userToken = Cookies.get("token");
 
     //fetch user data
     const fetchUserData = async () => {
@@ -65,10 +67,10 @@ const HomePage = () => {
     fetchUserData();
   }, []);
 
-  const userData = localStorage.getItem("user-data");
+  let userToken = Cookies.get("token");
 
   //if user is logged in
-  if (!userData) {
+  if (userToken === undefined) {
     return <Navigate to="/login" />;
   }
 

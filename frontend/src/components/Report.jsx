@@ -1,17 +1,18 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import BookingsContext from "../context/BookingsContext";
 import UserContext from "../context/UserContext";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import * as XLSX from "xlsx";
+import ReportTable from "./ReportTable";
+import { Pagination } from "flowbite-react";
 
 import Unavailable from "../assets/animations/not-available.json";
 
 const Report = () => {
   const [bookingsData, setBookingsData] = useContext(BookingsContext);
-  const lastSevenBookings = bookingsData.slice(-7).reverse();
   const { userDetails } = useContext(UserContext);
+  const [currentPage, setCurrentPage] = useState(1);
 
   //fetch motorist bookings data
   const fetchMotoristBookings = async (id) => {
@@ -55,24 +56,48 @@ const Report = () => {
       });
 
       setBookingsData(bookings);
+
       return;
     }
 
     setBookingsData([]);
   };
 
-  //generate lastes parking report
-  const generateReportPDF = () => {
-    const input = document.getElementById("receipt"); // ID of the container element to be converted
+  //generatean excel file with report details
+  const generateExcelReport = () => {
+    const data = bookingsData.map((booking) => {
+      const {
+        date,
+        parking_name,
+        parking_address,
+        parking_slot,
+        from_time,
+        to_time,
+        parking_duration,
+        total_fees,
+      } = booking;
 
-    html2canvas(input).then((canvas) => {
-      const pdf = new jsPDF("p", "mm", "a3");
-      const imgData = canvas.toDataURL("image/png");
-      pdf.addImage(imgData, "PNG", 10, 10, 280, 300); // Adjust the coordinates and dimensions as per your requirements
-
-      pdf.setTextColor(17, 24, 39);
-      pdf.save("receipt.pdf");
+      return {
+        date: date,
+        parking_name: parking_name,
+        parking_address: parking_address,
+        parking_slot: parking_slot,
+        from_time: from_time,
+        to_time: to_time,
+        parking_duration: parking_duration,
+        total_fees: total_fees,
+      };
     });
+
+    const excelData = data.reverse();
+
+    let wb = XLSX.utils.book_new();
+
+    let ws = XLSX.utils.json_to_sheet(excelData);
+
+    XLSX.utils.book_append_sheet(wb, ws, "ParkingReport");
+
+    XLSX.writeFile(wb, "ParkingReport.xlsx");
   };
 
   useLayoutEffect(() => {
@@ -90,7 +115,8 @@ const Report = () => {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-800">
         <h3 className="text-xl font-bold dark:text-white">
-          Report not available. Report will be displayed once parking is booked.
+          Looks like there is no report. Check back after booking have been
+          done.
         </h3>
 
         <Lottie animationData={Unavailable} loop={true} className="w-52" />
@@ -115,18 +141,31 @@ const Report = () => {
       </div>
     );
   }
+
+  const itemsPerPage = 7;
+
+  // Calculate the total number of pages based on the data length and items per page.
+  const totalPages = Math.ceil(bookingsData.length / itemsPerPage);
+
+  // Calculate the start and end indices for the current page.
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Extract the data for the current page.
+  const currentData = bookingsData.reverse().slice(startIndex, endIndex);
+
   return (
-    <>
+    <div>
       <div className="flex items-start mb-8">
         <h3 className="text-3xl font-bold dark:text-white">Report</h3>
       </div>
 
-      <div className="relative">
+      <div className="mb-2">
         <div className="flex items-center justify-between pb-4">
           <div>
             <button
               type="button"
-              onClick={generateReportPDF}
+              onClick={generateExcelReport}
               className="inline-flex items-center gap-2 text-primary-700 hover:text-white border border-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-primary-400 dark:text-primary-400 dark:hover:text-white dark:hover:bg-primary-700"
             >
               <svg
@@ -134,7 +173,7 @@ const Report = () => {
                 viewBox="0 0 24 24"
                 width="24"
                 height="24"
-                class="main-grid-item-icon"
+                className="main-grid-item-icon"
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
@@ -149,54 +188,19 @@ const Report = () => {
             </button>
           </div>
         </div>
-        <div id="receipt" className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Date
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Parking Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Parking Address
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Parking Slot
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Parking Duration
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Total Charges
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {lastSevenBookings.map((booking) => (
-                <tr
-                  key={booking.ID}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {booking.date}
-                  </th>
-                  <td className="px-6 py-4">{booking.parking_name}</td>
-                  <td className="px-6 py-4">{booking.parking_address}</td>
-                  <td className="px-6 py-4">{booking.parking_slot}</td>
-                  <td className="px-6 py-4">{booking.parking_duration} hr</td>
-                  <td className="px-6 py-4">ksh {booking.total_fees}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div>
+          <ReportTable bookings={currentData} />
+          <Pagination
+            currentPage={currentPage}
+            onPageChange={(page) => {
+              setCurrentPage(page);
+            }}
+            showIcons
+            totalPages={totalPages}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
