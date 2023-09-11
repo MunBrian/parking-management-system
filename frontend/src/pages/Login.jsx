@@ -98,7 +98,7 @@ const Login = () => {
           <h1 className="lg:hidden block mb-4 text-3xl font-extrabold tracking-wide md:text-5xl lg:text-6xl text-gray-900 dark:text-white">
             Park-It
           </h1>
-          <p className="lg:hidden block mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 lg:px-48">
+          <p className="lg:hidden block mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
             Find the perfect parking spot within the city.
           </p>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

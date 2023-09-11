@@ -204,15 +204,6 @@ const Book = () => {
 
       const stkdata = await stkresponse.json();
 
-      // const callBackResponse = await fetch(import.meta.env.VITE_CALLBACK_URL, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-
-      // console.log(callBackResponse);
-
       //if stkpush is sent successfully
       if (stkdata.status === 200) {
         //send booking details

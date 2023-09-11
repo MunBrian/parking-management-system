@@ -117,10 +117,12 @@ func ProcessPayment(c *fiber.Ctx) error {
 	var res mpesa.STKPushCallback
 
 	if err := c.BodyParser(&res); err != nil {
+		MpesaResultCode = 1032;
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"Status":  fiber.StatusBadRequest,
 			"Message": err.Error(),
 		})
+
 	}
 
 
@@ -138,17 +140,20 @@ func ProcessPayment(c *fiber.Ctx) error {
 
 
 	fmt.Printf("%v, from validate", sendResult.ResultCode)
-
+	
 	
 	if(sendResult.ResultCode == 0){
+		//assign valid result code to variable MpesaResultCode
 		MpesaResultCode = sendResult.ResultCode;
 		return c.Status(fiber.StatusAccepted).JSON(fiber.Map{
 			"Status":  fiber.StatusAccepted,
 			"message": "Payment Successfull",
 		})	
 	}
-
+		
+	//sent error code
 	MpesaResultCode = 1032;
+	
 
 	return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 		"Status":  fiber.StatusBadRequest,
