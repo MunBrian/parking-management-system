@@ -92,8 +92,8 @@ const Receipt = () => {
         <Loading />
       ) : (
         <>
-          <div className="flex items-center justify-center">
-            <div className="w-2/5 p-6 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
+          <div className="md:flex md:items-center md:justify-center h-screen md:h-auto">
+            <div className="md:w-2/5 p-6 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
               <div className="flex flex-col space-y-4 items-center pb-6 ">
                 <svg
                   fill="none"
