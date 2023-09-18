@@ -155,7 +155,7 @@ const Report = () => {
   const currentData = bookingsData.reverse().slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="flex items-start mb-8">
         <h3 className="text-3xl font-bold dark:text-white">Report</h3>
       </div>
