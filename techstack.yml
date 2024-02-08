@@ -1,0 +1,652 @@
+repo_name: MunBrian/parking-management-system
+report_id: 5c3617964cd0e6ace5569794d2d4312a
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-08T10:29:11+00:00'
+requested_by: MunBrian
+provider: github
+branch: master
+detected_tools_count: 46
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system
+  detection_source: Repo Metadata
+- name: Golang
+  description: An open source programming language that makes it easy to build simple,
+    reliable, and efficient software
+  website_url: http://golang.org/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1005/O6AczwfV_400x400.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/MunBrian/parking-management-system
+  detection_source: Repo Metadata
+- name: ApexCharts
+  description: "\U0001F4CA Interactive SVG Charts for React and Vue.js"
+  website_url: https://apexcharts.com/
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Charting Libraries
+  image_url: https://img.stackshare.io/service/10369/fYzCQZ9X_400x400.jpg
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-05-24 10:57:07.000000000 Z
+- name: Autoprefixer
+  description: PostCSS plugin to parse CSS and add vendor prefixes to CSS rules
+  website_url: https://github.com/postcss/autoprefixer
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: CSS Pre-processors / Extensions
+  image_url: https://img.stackshare.io/service/2202/72d087642cfce6fef6f2dabec5bf49e8_400x400.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: PostCSS
+  description: Transform CSS with JS plugins
+  website_url: https://github.com/postcss/postcss
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: CSS Pre-processors / Extensions
+  image_url: https://img.stackshare.io/service/3339/rlFcjEdI.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: React
+  description: A JavaScript library for building user interfaces
+  website_url: https://reactjs.org/
+  version: 18.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: React Router
+  description: A complete routing solution for React.js
+  website_url: https://github.com/rackt/react-router
+  version: 6.10.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: JavaScript Framework Components
+  image_url: https://img.stackshare.io/service/3350/8261421.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: Recharts
+  description: Redefined chart library built with React and D3
+  website_url: http://recharts.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Charting Libraries
+  image_url: https://img.stackshare.io/service/5608/13690587.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-05-24 10:57:07.000000000 Z
+- name: Tailwind CSS
+  description: A utility-first CSS framework for rapid UI development
+  website_url: https://tailwindcss.com
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Front-End Frameworks
+  image_url: https://img.stackshare.io/service/8158/default_660b7c41c3ba489cb581eec89c04655404258c19.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system
+  detection_source: Repo Metadata
+- name: Vite
+  description: Native-ESM powered web dev build tool
+  website_url: https://vitejs.dev/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: JS Build Tools / JS Task Runners
+  image_url: https://img.stackshare.io/service/21547/default_1aeac791cde11ff66cc0b20dcc6144eeb185c905.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: Vercel
+  description: It makes serverless application deployment easy
+  website_url: https://vercel.com/
+  open_source: false
+  hosted_saas: true
+  category: Application Utilities
+  sub_category: Static Web Hosting
+  image_url: https://img.stackshare.io/service/7618/bHjpwZem_400x400.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/vercel.json
+  detection_source: frontend/vercel.json
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-08-06 15:00:36.000000000 Z
+- name: Flowbite
+  description: Open-source library of Tailwind CSS components
+  website_url: https://flowbite.com/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: UI Components
+  image_url: https://img.stackshare.io/service/40090/default_dd2d5033d0363b16e87367cb62b402aa9da531bf.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-27 14:09:09.000000000 Z
+- name: Leaflet
+  description: JavaScript library for mobile-friendly interactive maps
+  website_url: http://leafletjs.com/
+  version: 1.9.3
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Application Utilities
+  sub_category: Mapping APIs
+  image_url: https://img.stackshare.io/service/2392/leaflet_upic.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-05-12 21:15:14.000000000 Z
+- name: bytebufferpool
+  description: Anti-memory-waste byte buffer pool
+  package_url: https://pkg.go.dev/github.com/valyala/bytebufferpool
+  version: 1.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: compress
+  description: Optimized compression packages
+  package_url: https://pkg.go.dev/github.com/klauspost/compress
+  version: 1.16.3
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: crypto
+  description: Go supplementary cryptography libraries
+  package_url: https://pkg.go.dev/golang.org/x/crypto
+  version: 0.0.0
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-07-18 20:31:06.000000000 Z
+  vulnerabilities:
+  - name: Improper Verification of Cryptographic Signature in golang.org/x/crypto
+    cve_id: CVE-2020-9283
+    cve_url: https://github.com/advisories/GHSA-ffhg-7mh4-33c4
+    detected_date: Aug 22
+    severity: moderate
+    first_patched: 0.0.0-20200220183623-bac4c82f6975
+- name: decimal
+  description: Arbitrary-precision fixed-point decimal numbers in go
+  package_url: https://pkg.go.dev/github.com/shopspring/decimal
+  version: 1.3.1
+  license: Other
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-07-18 20:31:06.000000000 Z
+- name: fasthttp
+  description: Fast HTTP package for Go
+  package_url: https://pkg.go.dev/github.com/valyala/fasthttp
+  version: 1.45.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: fwd
+  description: Buffered Reader/Writer
+  package_url: https://pkg.go.dev/github.com/philhofer/fwd
+  version: 1.1.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: go-colorable
+  description: Go-colorable Colorable writer for windows
+  package_url: https://pkg.go.dev/github.com/mattn/go-colorable
+  version: 0.1.13
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: go-isatty
+  description: Package isatty implements interface to isatty
+  package_url: https://pkg.go.dev/github.com/mattn/go-isatty
+  version: 0.0.16
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: go-runewidth
+  description: Go-runewidth Provides functions to get fixed width of the character
+    or string
+  package_url: https://pkg.go.dev/github.com/mattn/go-runewidth
+  version: 0.0.14
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: godotenv
+  description: A Go port of Ruby's dotenv library
+  package_url: https://pkg.go.dev/github.com/joho/godotenv
+  version: 1.5.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-07-18 20:31:06.000000000 Z
+- name: google/uuid
+  description: 'Go package for UUIDs based on RFC 4122 and DCE 1.1: Authentication
+    and Security Services'
+  package_url: https://pkg.go.dev/github.com/google/uuid
+  version: 1.3.0
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-07-18 20:31:06.000000000 Z
+- name: inflection
+  description: Pluralizes and singularizes English nouns
+  package_url: https://pkg.go.dev/github.com/jinzhu/inflection
+  version: 1.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-19 20:09:30.000000000 Z
+- name: msgp
+  description: A Go code generator for MessagePack / msgpack.org[Go]
+  package_url: https://pkg.go.dev/github.com/tinylib/msgp
+  version: 1.1.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: now
+  description: Now is a time toolkit for golang
+  package_url: https://pkg.go.dev/github.com/jinzhu/now
+  version: 1.1.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: sys
+  description: Go packages for low-level interaction with the operating system
+  package_url: https://pkg.go.dev/golang.org/x/sys
+  version: 0.0.0
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: tcplisten
+  description: Customizable TCP net.Listener for Go
+  package_url: https://pkg.go.dev/github.com/valyala/tcplisten
+  version: 1.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-18 19:23:02.000000000 Z
+- name: text
+  description: Go text processing support
+  package_url: https://pkg.go.dev/golang.org/x/text
+  version: 0.3.0
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Go Modules Packages
+  image_url: https://img.stackshare.io/package/go-packages/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/backend/go.sum
+  detection_source: backend/go.mod
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-19 20:09:30.000000000 Z
+- name: "@types/react"
+  description: TypeScript definitions for React
+  package_url: https://www.npmjs.com/@types/react
+  version: 18.0.33
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15894/default_1d65e37e65b7f80761374f0202776043277d505d.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: "@types/react-dom"
+  description: TypeScript definitions for React
+  package_url: https://www.npmjs.com/@types/react-dom
+  version: 18.0.11
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15946/default_54b691c123fc8979741e800e4dcd3936c0f3b246.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: dayjs
+  description: 2KB immutable date time library alternative to Moment.js with the same
+    modern API
+  package_url: https://www.npmjs.com/dayjs
+  version: 1.11.7
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16833/default_5c6919c5e02b8e6c83f3a2b23db5b6962e3caca0.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-05-24 10:57:07.000000000 Z
+- name: html2canvas
+  description: Screenshots with JavaScript
+  package_url: https://www.npmjs.com/html2canvas
+  version: 1.4.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17554/default_8d32936cb624bf7f51657c1540463db0a3c4106e.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-07-18 13:39:45.000000000 Z
+- name: js-cookie
+  description: A simple, lightweight JavaScript API for handling cookies
+  package_url: https://www.npmjs.com/js-cookie
+  version: 3.0.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16441/default_89ba91277e3434b03295bb11d22736632df1d04f.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-09-09 20:36:26.000000000 Z
+- name: react-dom
+  description: React package for working with the DOM
+  package_url: https://www.npmjs.com/react-dom
+  version: 18.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15808/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: react-error-overlay
+  description: An overlay for displaying stack frames
+  package_url: https://www.npmjs.com/react-error-overlay
+  version: 6.0.9
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17066/default_d17bbf7e4f3b102e29ff09c01b8165e7ba600319.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: react-icons
+  description: SVG React icons of popular icon packs using ES6 imports
+  package_url: https://www.npmjs.com/react-icons
+  version: 4.8.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16909/default_7b9968788548874538c601457e8dcd9c74bd2051.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: react-router-dom
+  description: DOM bindings for React Router
+  package_url: https://www.npmjs.com/react-router-dom
+  version: 6.10.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16025/default_e25d1fbb04a118c79fb444294461417342bd03bf.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: react-toastify
+  description: React notification made easy
+  package_url: https://www.npmjs.com/react-toastify
+  version: 9.1.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/18461/default_5ff724c0ff89bb42698aa80ef3403008cb0d8f72.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-07-08 13:26:21.000000000 Z
+- name: tailwindcss
+  description: A utility-first CSS framework for rapidly building custom user interfaces
+  package_url: https://www.npmjs.com/tailwindcss
+  version: 3.3.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17398/default_2cd7ed1c123f2fca074a6f4b16c4e73d5bfe82be.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+- name: vite
+  description: Native-ESM powered web dev build tool
+  package_url: https://www.npmjs.com/vite
+  version: 4.3.9
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/npm/image.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: MunBrian
+  last_updated_on: 2023-04-10 20:22:38.000000000 Z
+  vulnerabilities:
+  - name: Vite dev server option `server.fs.deny` can be bypassed when hosted on case-insensitive
+      filesystem
+    cve_id: CVE-2024-23331
+    cve_url: https://github.com/advisories/GHSA-c24v-8rfc-w8vw
+    detected_date: Jan 20
+    severity: high
+    first_patched: 4.5.2
+- name: xlsx
+  description: SheetJS Spreadsheet data parser and writer
+  package_url: https://www.npmjs.com/xlsx
+  version: 0.18.5
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16781/default_c6eddffbed005d007ab4638fbcac90e4b79576b2.png
+  detection_source_url: https://github.com/MunBrian/parking-management-system/blob/master/frontend/package-lock.json
+  detection_source: frontend/package.json
+  last_updated_by: Brian Mungai
+  last_updated_on: 2023-09-09 20:36:26.000000000 Z
+  vulnerabilities:
+  - name: Prototype Pollution in sheetJS
+    cve_id: CVE-2023-30533
+    cve_url: https://github.com/advisories/GHSA-4r6h-8v6p-xvw6
+    detected_date: Apr 25
+    severity: high
+    first_patched: 0.19.3
